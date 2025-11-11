@@ -6,24 +6,29 @@ from PIL import *
 import os
 from datetime import datetime, timezone, timedelta
 from dotenv import load_dotenv
+import sys
+
+if getattr(sys, 'frozen', False):
+    base_path = os.path.dirname(sys.executable)
+else:
+    base_path = os.path.dirname(os.path.abspath(__file__))
+
+favourites_path = os.path.join(base_path, "favourites.json")
 
 load_dotenv()
 api_key = os.getenv("OPENWEATHER_API_KEY")
 
 # --- load every picture and json file ---
-path = os.path.dirname(os.path.abspath(__file__))
-favourites_path = os.path.join(path, "favourites.json")
 if not os.path.exists(favourites_path):
     with open (favourites_path, "w") as f:
         json.dump([], f)
 
-star_path = os.path.join(path, "images", "star.png")
-star2_path = os.path.join(path, "images", "star2.png")
-app_icon_path = os.path.join(path, "images", "weather_icon.ico")
-search_image_path = os.path.join(path, "images", "search_icon.png")
-sunrise_image_path = os.path.join(path, "images", "sunrise.png")
-sunset_image_path = os.path.join(path, "images", "sunset.png")
-
+star_path = os.path.join(base_path, "images", "star.png")
+star2_path = os.path.join(base_path, "images", "star2.png")
+app_icon_path = os.path.join(base_path, "images", "weather_icon.ico")
+search_image_path = os.path.join(base_path, "images", "search_icon.png")
+sunrise_image_path = os.path.join(base_path, "images", "sunrise.png")
+sunset_image_path = os.path.join(base_path, "images", "sunset.png")
 # --- App config ---
 app = CTk()
 app.geometry("800x700")
