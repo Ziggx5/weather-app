@@ -6,12 +6,20 @@ import os
 from datetime import datetime, timezone, timedelta
 from dotenv import load_dotenv
 
+appdata = os.getenv('APPDATA')
+app_folder = os.path.join(appdata, "WeatherApp")
+
 load_dotenv()
 api_key = os.getenv("OPENWEATHER_API_KEY")
 
+if not os.path.exists(app_folder):
+    os.makedirs(app_folder)
+
+
 # --- load every picture and json file ---
 path = os.path.dirname(os.path.abspath(__file__))
-favourites_path = os.path.join(path, "favourites.json")
+favourites_path = os.path.join(app_folder, "favourites.json")
+
 if not os.path.exists(favourites_path):
     with open (favourites_path, "w") as f:
         json.dump([], f)
