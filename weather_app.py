@@ -1,4 +1,3 @@
-
 import requests
 import json
 from customtkinter import *
@@ -8,6 +7,7 @@ from datetime import datetime, timezone, timedelta
 from dotenv import load_dotenv
 import sys
 
+# --- path finding ---
 if getattr(sys, 'frozen', False):
     base_path = os.path.dirname(sys.executable)
 else:
@@ -29,6 +29,7 @@ app_icon_path = os.path.join(base_path, "images", "weather_icon.ico")
 search_image_path = os.path.join(base_path, "images", "search_icon.png")
 sunrise_image_path = os.path.join(base_path, "images", "sunrise.png")
 sunset_image_path = os.path.join(base_path, "images", "sunset.png")
+
 # --- App config ---
 app = CTk()
 app.geometry("800x700")
@@ -46,76 +47,6 @@ favourite_frame.place(x = 0, y = 70)
 search_frame = CTkFrame(app, fg_color = "transparent")
 search_frame.place(x = 10, y = 10)
 
-# --- Search bar ---
-search_bar = CTkEntry(search_frame, placeholder_text = "Search", width = 150, height = 30, corner_radius = 20, border_width = 0)
-search_bar.pack(side = "left", padx = (0, 10))
-
-# --- Error placeholder ---
-error_label = CTkLabel(app, text = "", font = ("Segoe UI", 15), text_color = "#f71616")
-error_label.place(x = 10, y = 40)
-
-# --- Place name placeholder ---
-place_name_label = CTkLabel(app, text = "", font = ("Segoe UI", 40))
-place_name_label.place(x = 512.5, y = 100, anchor = "center")
-
-# --- Temperature placeholder ---
-temperature_label = CTkLabel(app, text = "", font = ("Segoe UI", 60))
-temperature_label.place(x = 512.5, y = 170, anchor = "center")
-
-# --- Description placeholder ---
-description_label = CTkLabel(app, text = "", font = ("Segoe UI", 20))
-description_label.place(x = 512.5, y = 230, anchor = "center")
-
-# --- Humidity ---
-humidity_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
-humidity_frame.place(x = 267.5, y = 270)
-humidity_frame.grid_propagate(False)
-humidity_frame.grid_columnconfigure(0, weight = 1)
-humidity_frame.grid_rowconfigure((0, 1, 2), weight = 1)
-
-humidity_label = CTkLabel(humidity_frame, text = "Humidity", font = ("Segoe UI", 23))
-humidity_label.grid(row = 0, column = 0)
-humidity_percentage = CTkLabel(humidity_frame, text = "%", font = ("Segoe UI", 26))
-humidity_percentage.grid(row = 1, column = 0)
-
-# --- precipitation ---
-precipitation_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
-precipitation_frame.place(x = 437.5, y = 270)
-precipitation_frame.grid_propagate(False)
-precipitation_frame.grid_columnconfigure(0, weight = 1)
-precipitation_frame.grid_rowconfigure((0, 1, 2), weight = 1)
-
-precipitation_label = CTkLabel(precipitation_frame, text = "Precipitation", font = ("Segoe UI", 23))
-precipitation_label.grid(row = 0, column = 0)
-
-precipitation_measure = CTkLabel(precipitation_frame, text = "mm", font = ("Segoe UI", 26))
-precipitation_measure.grid(row = 1, column = 0)
-
-# --- Sunrise and sunset ---
-sunrise_image = Image.open(sunrise_image_path)
-sunset_image = Image.open(sunset_image_path)
-
-sunrise_sunset_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
-sunrise_sunset_frame.place(x = 607.5, y = 270)
-sunrise_sunset_frame.grid_propagate(False)
-sunrise_sunset_frame.grid_columnconfigure(0, weight = 1)
-sunrise_sunset_frame.grid_rowconfigure((0, 1, 2, 3), weight = 1)
-
-sunrise_label = CTkLabel(sunrise_sunset_frame, image = CTkImage(light_image = sunrise_image, dark_image = sunrise_image, size = (30, 30)), text = "")
-sunrise_label.grid(row = 0, column = 0)
-sunrise_time = CTkLabel(sunrise_sunset_frame, text = "Sunrise time", font = ("Segoe UI", 20))
-sunrise_time.grid(row = 1, column = 0)
-
-sunset_label = CTkLabel(sunrise_sunset_frame, image = CTkImage(light_image = sunset_image, dark_image = sunset_image, size = (30, 30)), text = "")
-sunset_label.grid(row = 2, column = 0)
-sunset_time = CTkLabel(sunrise_sunset_frame, text = "Sunset time", font = ("Segoe UI", 20))
-sunset_time.grid(row = 3, column = 0)
-
-# --- favourite button ---
-star_image = Image.open(star_path)
-favourite_button = CTkButton(app, text = "", image = CTkImage(light_image = star_image, dark_image = star_image), width = 30, height = 30, fg_color = "white", command = lambda: toggle_favourite(place_name_label.cget("text")))
-favourite_button.place(x = 727.5, y = 40)
-
 def load_favourites():
     try:
         with open (favourites_path, "r") as f:
@@ -131,21 +62,21 @@ def save_favourites(favourites):
 
 def toggle_favourite(place):
     if not place:
-        error_label.configure(text = "No place selected yet.")
+        status_label.configure(text = "No place selected yet.")
         return
     if place in favourites:
         favourites.remove(place)
         save_favourites(favourites)
         star_image = Image.open(star_path)
         favourite_button.configure(image = CTkImage(light_image = star_image, dark_image = star_image))
-        error_label.configure(text = "")
+        status_label.configure(text = "")
 
     else:
         favourites.append(place)
         save_favourites(favourites)
         star2_image = Image.open(star2_path)
         favourite_button.configure(image = CTkImage(light_image = star2_image, dark_image = star2_image))
-        error_label.configure(text = "")
+        status_label.configure(text = "")
     update_favourite_list()
 
 def update_favourite_list():
@@ -166,7 +97,7 @@ def search_by_name(place_name):
 def search_handler():
     search_bar_entry = search_bar.get().strip()
     if search_bar_entry == "":
-        error_label.configure(text = "Empty input")
+        status_label.configure(text = "Empty input")
         return
 
     cords_url = f"http://api.openweathermap.org/geo/1.0/direct?q={search_bar_entry}&limit=1&appid={api_key}"
@@ -174,22 +105,18 @@ def search_handler():
 
     # --- get coordinates ---
     if response1.status_code == 200:
-        error_label.configure(text = "")
         data1 = response1.json()
         if data1:
-            error_label.configure(text = "")
+            status_label.configure(text = "")
             lat = data1[0]["lat"]
             lon = data1[0]["lon"]
             
             # --- Get weather and forecast info ---
             weather_data_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid={api_key}"
-            weekly_forecast_url = f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&units=metric&appid={api_key}"
             response2 = requests.get(weather_data_url)
-            response3 = requests.get(weekly_forecast_url)
-            if response2.status_code == 200 and response3.status_code == 200:
-                error_label.configure(text = "")
+            if response2.status_code == 200:
+                status_label.configure(text = "")
                 data2 = response2.json()
-                data3 =response3.json()
                 temperature = int(data2["main"]["temp"])
                 feels_like = int(data2["main"]["feels_like"])
                 description = data2["weather"][0]["description"]
@@ -249,16 +176,87 @@ def search_handler():
 
             else:
                 print("Error getting weather info", response2.status_code, response2.text)
-                error_label.configure(text = "Error getting weather info" + response2.status_code + response2.text)
+                status_label.configure(text = "Error getting weather info" + response2.status_code + response2.text)
         else:
-            error_label.configure(text = "Place not found.")
+            status_label.configure(text = "Place not found.")
     else:
-        error_label.configure(text = "Error:" + response1.status_code + response1.text)
+        status_label.configure(text = "Error:" + response1.status_code + response1.text)
     search_bar.delete(0, "end")
+
+# --- favourite button ---
+star_image = Image.open(star_path)
+favourite_button = CTkButton(app, text = "", image = CTkImage(light_image = star_image, dark_image = star_image), width = 30, height = 30, fg_color = "white", command = lambda: toggle_favourite(place_name_label.cget("text")))
+favourite_button.place(x = 727.5, y = 40)
 
 # --- Search button ---
 search_image = Image.open(search_image_path)
 search_button = CTkButton(search_frame, image = CTkImage(dark_image = search_image, light_image = search_image), text = "", width = 30, height = 30, fg_color = "white", corner_radius = 20, border_width = 0, command = search_handler)
 search_button.pack(side = "right")
+
+# --- Search bar ---
+search_bar = CTkEntry(search_frame, placeholder_text = "Search", width = 150, height = 30, corner_radius = 20, border_width = 0)
+search_bar.pack(side = "left", padx = (0, 10))
+search_bar.bind("<Return>", lambda event: search_handler())
+
+# --- status placeholder ---
+status_label = CTkLabel(app, text = "", font = ("Segoe UI", 15), text_color = "#f71616")
+status_label.place(x = 10, y = 40)
+
+# --- Place name placeholder ---
+place_name_label = CTkLabel(app, text = "", font = ("Segoe UI", 40))
+place_name_label.place(x = 512.5, y = 100, anchor = "center")
+
+# --- Temperature placeholder ---
+temperature_label = CTkLabel(app, text = "", font = ("Segoe UI", 60))
+temperature_label.place(x = 512.5, y = 170, anchor = "center")
+
+# --- Description placeholder ---
+description_label = CTkLabel(app, text = "", font = ("Segoe UI", 20))
+description_label.place(x = 512.5, y = 230, anchor = "center")
+
+# --- Humidity ---
+humidity_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
+humidity_frame.place(x = 267.5, y = 270)
+humidity_frame.grid_propagate(False)
+humidity_frame.grid_columnconfigure(0, weight = 1)
+humidity_frame.grid_rowconfigure((0, 1, 2), weight = 1)
+
+humidity_label = CTkLabel(humidity_frame, text = "Humidity", font = ("Segoe UI", 23))
+humidity_label.grid(row = 0, column = 0)
+humidity_percentage = CTkLabel(humidity_frame, text = "%", font = ("Segoe UI", 26))
+humidity_percentage.grid(row = 1, column = 0)
+
+# --- precipitation ---
+precipitation_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
+precipitation_frame.place(x = 437.5, y = 270)
+precipitation_frame.grid_propagate(False)
+precipitation_frame.grid_columnconfigure(0, weight = 1)
+precipitation_frame.grid_rowconfigure((0, 1, 2), weight = 1)
+
+precipitation_label = CTkLabel(precipitation_frame, text = "Precipitation", font = ("Segoe UI", 23))
+precipitation_label.grid(row = 0, column = 0)
+
+precipitation_measure = CTkLabel(precipitation_frame, text = "mm", font = ("Segoe UI", 26))
+precipitation_measure.grid(row = 1, column = 0)
+
+# --- Sunrise and sunset ---
+sunrise_image = Image.open(sunrise_image_path)
+sunset_image = Image.open(sunset_image_path)
+
+sunrise_sunset_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
+sunrise_sunset_frame.place(x = 607.5, y = 270)
+sunrise_sunset_frame.grid_propagate(False)
+sunrise_sunset_frame.grid_columnconfigure(0, weight = 1)
+sunrise_sunset_frame.grid_rowconfigure((0, 1, 2, 3), weight = 1)
+
+sunrise_label = CTkLabel(sunrise_sunset_frame, image = CTkImage(light_image = sunrise_image, dark_image = sunrise_image, size = (30, 30)), text = "")
+sunrise_label.grid(row = 0, column = 0)
+sunrise_time = CTkLabel(sunrise_sunset_frame, text = "Sunrise time", font = ("Segoe UI", 20))
+sunrise_time.grid(row = 1, column = 0)
+
+sunset_label = CTkLabel(sunrise_sunset_frame, image = CTkImage(light_image = sunset_image, dark_image = sunset_image, size = (30, 30)), text = "")
+sunset_label.grid(row = 2, column = 0)
+sunset_time = CTkLabel(sunrise_sunset_frame, text = "Sunset time", font = ("Segoe UI", 20))
+sunset_time.grid(row = 3, column = 0)
 
 app.mainloop()
