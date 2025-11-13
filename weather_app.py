@@ -29,6 +29,8 @@ app_icon_path = os.path.join(base_path, "images", "weather_icon.ico")
 search_image_path = os.path.join(base_path, "images", "search_icon.png")
 sunrise_image_path = os.path.join(base_path, "images", "sunrise.png")
 sunset_image_path = os.path.join(base_path, "images", "sunset.png")
+humidity_image_path = os.path.join(base_path, "images", "humidity.png")
+precipitation_image_path = os.path.join(base_path, "images", "precipitation.png")
 
 # --- App config ---
 app = CTk()
@@ -39,7 +41,7 @@ app.configure(fg_color = "#242424")
 app.resizable(False, False)
 
 # --- Frame for favourite places ---
-favourite_frame = CTkFrame(app, fg_color = "transparent", width = 225, height = 650, border_color = "#333333", border_width = 1)
+favourite_frame = CTkFrame(app, fg_color = "transparent", border_color = "#3a3a3a", border_width = 2)
 favourite_frame.grid_propagate(False)
 favourite_frame.place(x = 0, y = 70, relheight = 1, relwidth = 0.28)
 
@@ -84,6 +86,11 @@ def update_favourite_list():
         widget.destroy()
     
     for place in favourites:
+        if len(place) > 10:
+            place_text = place[:10] + "..."
+        else:
+            place_text = place
+
         try:
             cords_url = f"http://api.openweathermap.org/geo/1.0/direct?q={place}&limit=1&appid={api_key}"
             response1 = requests.get(cords_url)
@@ -98,13 +105,13 @@ def update_favourite_list():
                 if response2.status_code == 200:
                     data2 = response2.json()
                     temperature = int(data2["main"]["temp"])
-                    temp_text = f"{temperature} °C"
+                    temp_text = f"{temperature}°"
                 else:
                     temp_text = "N/A"
         except:
             temp_text = "N/A"
 
-        btn = CTkButton(favourite_frame, text = f"{place} | {temp_text}", fg_color = "#2f2f2f", border_width= 2, corner_radius = 5, height = 40, font = ("Segoe UI", 20), border_color= "#333333", command = lambda p = place: search_by_name(p))
+        btn = CTkButton(favourite_frame, text = f"{place_text} | {temp_text}", fg_color = "#2f2f2f", border_width= 2, corner_radius = 5, height = 40, font = ("Segoe UI", 20), border_color= "#333333", command = lambda p = place: search_by_name(p))
         btn.pack(pady = 5, padx = 5, fill = "x")
 
 update_favourite_list()
@@ -189,8 +196,8 @@ def search_handler():
                 place_name_label.configure(text = place_name)
                 temperature_label.configure(text = str(temperature) + "°", text_color = temp_color)
                 description_label.configure(text = description+ " | Feels like: " + str(feels_like) + "°")
-                humidity_percentage.configure(text = str(humidity) + " %")
-                precipitation_measure.configure(text = str(precipitation) + " mm")
+                humidity_percentage.configure(text = str(humidity) + "%")
+                precipitation_measure.configure(text = str(precipitation) + "mm")
                 sunrise_time.configure(text = str(sunrise))
                 sunset_time.configure(text = str(sunset))
 
@@ -235,29 +242,31 @@ description_label = CTkLabel(app, text = "", font = ("Segoe UI", 20))
 description_label.place(x = 512.5, y = 230, anchor = "center")
 
 # --- Humidity ---
+humidity_image = Image.open(humidity_image_path)
 humidity_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
 humidity_frame.place(x = 267.5, y = 270)
 humidity_frame.grid_propagate(False)
 humidity_frame.grid_columnconfigure(0, weight = 1)
 humidity_frame.grid_rowconfigure((0, 1, 2), weight = 1)
 
-humidity_label = CTkLabel(humidity_frame, text = "Humidity", font = ("Segoe UI", 23))
+humidity_label = CTkLabel(humidity_frame, image = CTkImage(dark_image = humidity_image, light_image = humidity_image, size = (50, 50)), text = "", font = ("Segoe UI", 23))
 humidity_label.grid(row = 0, column = 0)
-humidity_percentage = CTkLabel(humidity_frame, text = "%", font = ("Segoe UI", 26))
-humidity_percentage.grid(row = 1, column = 0)
+humidity_percentage = CTkLabel(humidity_frame, text = "%", font = ("Segoe UI", 30))
+humidity_percentage.grid(row = 1, column = 0, pady = (0, 30))
 
 # --- precipitation ---
+precipitation_image = Image.open(precipitation_image_path)
 precipitation_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
 precipitation_frame.place(x = 437.5, y = 270)
 precipitation_frame.grid_propagate(False)
 precipitation_frame.grid_columnconfigure(0, weight = 1)
 precipitation_frame.grid_rowconfigure((0, 1, 2), weight = 1)
 
-precipitation_label = CTkLabel(precipitation_frame, text = "Precipitation", font = ("Segoe UI", 23))
+precipitation_label = CTkLabel(precipitation_frame, image = CTkImage(dark_image = precipitation_image, light_image = precipitation_image, size= (60, 60)), text = "", font = ("Segoe UI", 23))
 precipitation_label.grid(row = 0, column = 0)
 
-precipitation_measure = CTkLabel(precipitation_frame, text = "mm", font = ("Segoe UI", 26))
-precipitation_measure.grid(row = 1, column = 0)
+precipitation_measure = CTkLabel(precipitation_frame, text = "mm", font = ("Segoe UI", 30))
+precipitation_measure.grid(row = 1, column = 0, pady = (0, 40))
 
 # --- Sunrise and sunset ---
 sunrise_image = Image.open(sunrise_image_path)
@@ -270,7 +279,7 @@ sunrise_sunset_frame.grid_columnconfigure(0, weight = 1)
 sunrise_sunset_frame.grid_rowconfigure((0, 1, 2, 3), weight = 1)
 
 sunrise_label = CTkLabel(sunrise_sunset_frame, image = CTkImage(light_image = sunrise_image, dark_image = sunrise_image, size = (30, 30)), text = "")
-sunrise_label.grid(row = 0, column = 0)
+sunrise_label.grid(row = 0, column = 0, pady = (5, 0))
 sunrise_time = CTkLabel(sunrise_sunset_frame, text = "Sunrise time", font = ("Segoe UI", 20))
 sunrise_time.grid(row = 1, column = 0)
 
