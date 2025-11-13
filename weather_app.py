@@ -41,7 +41,7 @@ app.resizable(False, False)
 # --- Frame for favourite places ---
 favourite_frame = CTkFrame(app, fg_color = "transparent", width = 225, height = 650, border_color = "#333333", border_width = 1)
 favourite_frame.grid_propagate(False)
-favourite_frame.place(x = 0, y = 70)
+favourite_frame.place(x = 0, y = 70, relheight = 1, relwidth = 0.28)
 
 # --- Frame for search bar and search button ---
 search_frame = CTkFrame(app, fg_color = "transparent")
@@ -84,8 +84,28 @@ def update_favourite_list():
         widget.destroy()
     
     for place in favourites:
-        btn = CTkButton(favourite_frame, text = place, fg_color = "#2f2f2f", border_width= 2, corner_radius = 10, font = ("Segoe UI", 20), border_color= "#333333", command = lambda p = place: search_by_name(p))
-        btn.pack(pady = 5, padx = 10, fill = "x")
+        try:
+            cords_url = f"http://api.openweathermap.org/geo/1.0/direct?q={place}&limit=1&appid={api_key}"
+            response1 = requests.get(cords_url)
+            data1 = response1.json()
+            if not data1:
+                temp_text = "N/A"
+            else:
+                lat = data1[0]["lat"]
+                lon = data1[0]["lon"]
+                weather_data_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid={api_key}"
+                response2 = requests.get(weather_data_url)
+                if response2.status_code == 200:
+                    data2 = response2.json()
+                    temperature = int(data2["main"]["temp"])
+                    temp_text = f"{temperature} °C"
+                else:
+                    temp_text = "N/A"
+        except:
+            temp_text = "N/A"
+
+        btn = CTkButton(favourite_frame, text = f"{place} | {temp_text}", fg_color = "#2f2f2f", border_width= 2, corner_radius = 5, height = 40, font = ("Segoe UI", 20), border_color= "#333333", command = lambda p = place: search_by_name(p))
+        btn.pack(pady = 5, padx = 5, fill = "x")
 
 update_favourite_list()
 
