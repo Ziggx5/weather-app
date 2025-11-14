@@ -31,6 +31,8 @@ sunrise_image_path = os.path.join(base_path, "images", "sunrise.png")
 sunset_image_path = os.path.join(base_path, "images", "sunset.png")
 humidity_image_path = os.path.join(base_path, "images", "humidity.png")
 precipitation_image_path = os.path.join(base_path, "images", "precipitation.png")
+wind_image_path = os.path.join(base_path, "images", "wind.png")
+refresh_image_path = os.path.join(base_path, "images", "refresh.png")
 
 # --- App config ---
 app = CTk()
@@ -111,8 +113,8 @@ def update_favourite_list():
         except:
             temp_text = "N/A"
 
-        btn = CTkButton(favourite_frame, text = f"{place_text} | {temp_text}", fg_color = "#2f2f2f", border_width= 2, corner_radius = 5, height = 40, font = ("Segoe UI", 20), border_color= "#333333", command = lambda p = place: search_by_name(p))
-        btn.pack(pady = 5, padx = 5, fill = "x")
+        favourite_buttons = CTkButton(favourite_frame, text = f"{place_text} | {temp_text}", fg_color = "#2f2f2f", border_width= 2, corner_radius = 5, height = 40, font = ("Segoe UI", 20), border_color= "#333333", hover_color = "gray", command = lambda p = place: search_by_name(p))
+        favourite_buttons.pack(pady = 5, padx = 5, fill = "x")
 
 update_favourite_list()
 
@@ -151,7 +153,7 @@ def search_handler():
                 sunrise_unix_timestamp = data2["sys"]["sunrise"]
                 sunset_unix_timestamp = data2["sys"]["sunset"]
                 timezone_offset = data2["timezone"]
-
+                wind_speed = data2["wind"]["speed"]
                 sunrise = (datetime.fromtimestamp(sunrise_unix_timestamp, tz = timezone.utc) + timedelta(seconds = timezone_offset))
                 sunrise = sunrise.strftime("%H:%M")
                 sunset = (datetime.fromtimestamp(sunset_unix_timestamp, tz = timezone.utc) + timedelta(seconds = timezone_offset))
@@ -200,6 +202,7 @@ def search_handler():
                 precipitation_measure.configure(text = str(precipitation) + "mm")
                 sunrise_time.configure(text = str(sunrise))
                 sunset_time.configure(text = str(sunset))
+                wind_speed_label.configure(text = str(wind_speed) + "km/h")
 
             else:
                 print("Error getting weather info", response2.status_code, response2.text)
@@ -212,13 +215,18 @@ def search_handler():
 
 # --- favourite button ---
 star_image = Image.open(star_path)
-favourite_button = CTkButton(app, text = "", image = CTkImage(light_image = star_image, dark_image = star_image), width = 30, height = 30, fg_color = "white", command = lambda: toggle_favourite(place_name_label.cget("text")))
+favourite_button = CTkButton(app, text = "", image = CTkImage(light_image = star_image, dark_image = star_image), width = 30, height = 30, fg_color = "white", command = lambda: toggle_favourite(place_name_label.cget("text")), hover_color = "gray")
 favourite_button.place(x = 727.5, y = 40)
 
 # --- Search button ---
 search_image = Image.open(search_image_path)
-search_button = CTkButton(search_frame, image = CTkImage(dark_image = search_image, light_image = search_image), text = "", width = 30, height = 30, fg_color = "white", corner_radius = 20, border_width = 0, command = search_handler)
+search_button = CTkButton(search_frame, image = CTkImage(dark_image = search_image, light_image = search_image), text = "", width = 30, height = 30, fg_color = "white", corner_radius = 20, border_width = 0, command = search_handler, hover_color = "gray")
 search_button.pack(side = "right")
+
+# --- Refresh button ---
+refresh_image = Image.open(refresh_image_path)
+refresh_button = CTkButton(app, image = CTkImage(dark_image = refresh_image, light_image = refresh_image), text = "", width = 30, height = 30, fg_color = "white", hover_color = "gray",command = lambda: update_favourite_list())
+refresh_button.place(x = 230, y = 71)
 
 # --- Search bar ---
 search_bar = CTkEntry(search_frame, placeholder_text = "Search", width = 150, height = 30, corner_radius = 20, border_width = 0)
@@ -249,7 +257,7 @@ humidity_frame.grid_propagate(False)
 humidity_frame.grid_columnconfigure(0, weight = 1)
 humidity_frame.grid_rowconfigure((0, 1, 2), weight = 1)
 
-humidity_label = CTkLabel(humidity_frame, image = CTkImage(dark_image = humidity_image, light_image = humidity_image, size = (50, 50)), text = "", font = ("Segoe UI", 23))
+humidity_label = CTkLabel(humidity_frame, image = CTkImage(dark_image = humidity_image, light_image = humidity_image, size = (50, 50)), text = "")
 humidity_label.grid(row = 0, column = 0)
 humidity_percentage = CTkLabel(humidity_frame, text = "%", font = ("Segoe UI", 30))
 humidity_percentage.grid(row = 1, column = 0, pady = (0, 30))
@@ -278,8 +286,8 @@ sunrise_sunset_frame.grid_propagate(False)
 sunrise_sunset_frame.grid_columnconfigure(0, weight = 1)
 sunrise_sunset_frame.grid_rowconfigure((0, 1, 2, 3), weight = 1)
 
-sunrise_label = CTkLabel(sunrise_sunset_frame, image = CTkImage(light_image = sunrise_image, dark_image = sunrise_image, size = (30, 30)), text = "")
-sunrise_label.grid(row = 0, column = 0, pady = (5, 0))
+sunrise_image_placeholder = CTkLabel(sunrise_sunset_frame, image = CTkImage(light_image = sunrise_image, dark_image = sunrise_image, size = (30, 30)), text = "")
+sunrise_image_placeholder.grid(row = 0, column = 0, pady = (5, 0))
 sunrise_time = CTkLabel(sunrise_sunset_frame, text = "Sunrise time", font = ("Segoe UI", 20))
 sunrise_time.grid(row = 1, column = 0)
 
@@ -287,5 +295,30 @@ sunset_label = CTkLabel(sunrise_sunset_frame, image = CTkImage(light_image = sun
 sunset_label.grid(row = 2, column = 0)
 sunset_time = CTkLabel(sunrise_sunset_frame, text = "Sunset time", font = ("Segoe UI", 20))
 sunset_time.grid(row = 3, column = 0)
+
+# --- wind speed ---
+wind_image = Image.open(wind_image_path)
+wind_speed_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
+wind_speed_frame.place(x = 267.5, y = 440)
+wind_speed_frame.grid_propagate(False)
+wind_speed_frame.columnconfigure(0, weight = 1)
+wind_speed_frame.rowconfigure((0, 1, 2, 3), weight = 1)
+
+wind_image_placeholder = CTkLabel(wind_speed_frame, text = "", image = CTkImage(dark_image = wind_image , light_image = wind_image, size = (50, 50)))
+wind_image_placeholder.grid(row = 0, column = 0)
+wind_speed_label = CTkLabel(wind_speed_frame, text = "km/h", font = ("Segoe UI", 25))
+wind_speed_label.grid(row = 1, column = 0)
+
+'''
+# --- Weather alert ---
+weather_alert_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 320, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
+weather_alert_frame.place(x = 437.5, y = 440)
+weather_alert_frame.grid_propagate(False)
+weather_alert_frame.columnconfigure(0, weight = 1)
+weather_alert_frame.rowconfigure((0, 1, 2, 3), weight = 1)
+
+alert_image_placeholder = CTkLabel(weather_alert_frame, text = "")
+alert_image_placeholder.grid(row = 0, column = 0)
+'''
 
 app.mainloop()
