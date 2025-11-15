@@ -7,7 +7,6 @@ Image from latest version (1.3)
 <img width="803" height="725" alt="image" src="https://github.com/user-attachments/assets/bcf82563-6fdf-4872-be09-42aad56f6111" />
 
 ---
-
 ✨ Features
 - 🔍 **Search any city**
 - ⭐ **Favourite places** (stored in local `favourites.json` file)
@@ -18,7 +17,6 @@ Image from latest version (1.3)
 - 🔁 **Refresh button to update all widgets**
 - 📁 **Smart path handling (works in normal Python file and compiled `.exe`)**
 - 🖼️ **Custom icons + responsive UI built with CustomTkinter**
-
 ---
 
 🚀 Installation (Executable)
