@@ -34,6 +34,7 @@ Image from latest version (1.3)
 - OpenWeather API
 
 📄 License
+
 This project is licensed under the MIT License.
 Copyright © 2025 Maj Sedonja
 
