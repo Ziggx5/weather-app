@@ -1,3 +1,5 @@
+#Copyright © 2025 Maj Sedonja
+#Licensed under the MIT License. See LICENSE file for details.
 import requests
 import json
 from customtkinter import *
@@ -45,7 +47,7 @@ app.resizable(False, False)
 # --- Frame for favourite places ---
 favourite_frame = CTkFrame(app, fg_color = "transparent", border_color = "#3a3a3a", border_width = 2)
 favourite_frame.grid_propagate(False)
-favourite_frame.place(x = 0, y = 70, relheight = 1, relwidth = 0.28)
+favourite_frame.place(x = 0, y = 70, relheight = 0.86, relwidth = 0.28)
 
 # --- Frame for search bar and search button ---
 search_frame = CTkFrame(app, fg_color = "transparent")
@@ -59,6 +61,7 @@ def load_favourites():
         return []
 
 favourites = load_favourites()
+last_search = "New York"
 
 def save_favourites(favourites):
     with open (favourites_path, "w") as f:
@@ -118,12 +121,18 @@ def update_favourite_list():
 
 update_favourite_list()
 
+def refresh():
+    update_favourite_list()
+    if last_search:
+        search_by_name(last_search)
+
 def search_by_name(place_name):
     search_bar.delete(0, "end")
     search_bar.insert(0, place_name)
     search_handler()
 
 def search_handler():
+    global last_search
     search_bar_entry = search_bar.get().strip()
     if search_bar_entry == "":
         status_label.configure(text = "Empty input")
@@ -144,6 +153,7 @@ def search_handler():
             weather_data_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid={api_key}"
             response2 = requests.get(weather_data_url)
             if response2.status_code == 200:
+                last_search = search_bar_entry
                 status_label.configure(text = "")
                 data2 = response2.json()
                 temperature = int(data2["main"]["temp"])
@@ -225,7 +235,7 @@ search_button.pack(side = "right")
 
 # --- Refresh button ---
 refresh_image = Image.open(refresh_image_path)
-refresh_button = CTkButton(app, image = CTkImage(dark_image = refresh_image, light_image = refresh_image), text = "", width = 30, height = 30, fg_color = "white", hover_color = "gray",command = lambda: update_favourite_list())
+refresh_button = CTkButton(app, image = CTkImage(dark_image = refresh_image, light_image = refresh_image), text = "", width = 30, height = 30, fg_color = "white", hover_color = "gray",command = lambda: refresh())
 refresh_button.place(x = 230, y = 71)
 
 # --- Search bar ---
@@ -308,17 +318,5 @@ wind_image_placeholder = CTkLabel(wind_speed_frame, text = "", image = CTkImage(
 wind_image_placeholder.grid(row = 0, column = 0)
 wind_speed_label = CTkLabel(wind_speed_frame, text = "km/h", font = ("Segoe UI", 25))
 wind_speed_label.grid(row = 1, column = 0)
-
-'''
-# --- Weather alert ---
-weather_alert_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 320, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
-weather_alert_frame.place(x = 437.5, y = 440)
-weather_alert_frame.grid_propagate(False)
-weather_alert_frame.columnconfigure(0, weight = 1)
-weather_alert_frame.rowconfigure((0, 1, 2, 3), weight = 1)
-
-alert_image_placeholder = CTkLabel(weather_alert_frame, text = "")
-alert_image_placeholder.grid(row = 0, column = 0)
-'''
 
 app.mainloop()
