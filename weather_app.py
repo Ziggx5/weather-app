@@ -35,6 +35,7 @@ humidity_image_path = os.path.join(base_path, "images", "humidity.png")
 precipitation_image_path = os.path.join(base_path, "images", "precipitation.png")
 wind_image_path = os.path.join(base_path, "images", "wind.png")
 refresh_image_path = os.path.join(base_path, "images", "refresh.png")
+arrow_image_path = os.path.join(base_path, "images", "arrow.png")
 
 # --- App config ---
 app = CTk()
@@ -61,7 +62,6 @@ def load_favourites():
         return []
 
 favourites = load_favourites()
-last_search = "New York"
 
 def save_favourites(favourites):
     with open (favourites_path, "w") as f:
@@ -123,8 +123,6 @@ update_favourite_list()
 
 def refresh():
     update_favourite_list()
-    if last_search:
-        search_by_name(last_search)
 
 def search_by_name(place_name):
     search_bar.delete(0, "end")
@@ -132,7 +130,6 @@ def search_by_name(place_name):
     search_handler()
 
 def search_handler():
-    global last_search
     search_bar_entry = search_bar.get().strip()
     if search_bar_entry == "":
         status_label.configure(text = "Empty input")
@@ -164,6 +161,7 @@ def search_handler():
                 sunset_unix_timestamp = data2["sys"]["sunset"]
                 timezone_offset = data2["timezone"]
                 wind_speed = data2["wind"]["speed"]
+                wind_degrees = data2["wind"]["deg"]
                 sunrise = (datetime.fromtimestamp(sunrise_unix_timestamp, tz = timezone.utc) + timedelta(seconds = timezone_offset))
                 sunrise = sunrise.strftime("%H:%M")
                 sunset = (datetime.fromtimestamp(sunset_unix_timestamp, tz = timezone.utc) + timedelta(seconds = timezone_offset))
@@ -213,7 +211,12 @@ def search_handler():
                 sunrise_time.configure(text = str(sunrise))
                 sunset_time.configure(text = str(sunset))
                 wind_speed_label.configure(text = str(wind_speed) + "km/h")
+                wind_degrees_label.configure(text = str(wind_degrees) + "°")
+                rotate_arrow = arrow_image.rotate(-wind_degrees + 180)
+                rotated_arrow = CTkImage(light_image = rotate_arrow, dark_image = rotate_arrow, size = (80, 80))
+                wind_arrow.configure(image = rotated_arrow)
 
+                
             else:
                 print("Error getting weather info", response2.status_code, response2.text)
                 status_label.configure(text = "Error getting weather info" + response2.status_code + response2.text)
@@ -233,15 +236,15 @@ search_image = Image.open(search_image_path)
 search_button = CTkButton(search_frame, image = CTkImage(dark_image = search_image, light_image = search_image), text = "", width = 30, height = 30, fg_color = "white", corner_radius = 20, border_width = 0, command = search_handler, hover_color = "gray")
 search_button.pack(side = "right")
 
-# --- Refresh button ---
-refresh_image = Image.open(refresh_image_path)
-refresh_button = CTkButton(app, image = CTkImage(dark_image = refresh_image, light_image = refresh_image), text = "", width = 30, height = 30, fg_color = "white", hover_color = "gray",command = lambda: refresh())
-refresh_button.place(x = 230, y = 71)
-
 # --- Search bar ---
 search_bar = CTkEntry(search_frame, placeholder_text = "Search", width = 150, height = 30, corner_radius = 20, border_width = 0)
 search_bar.pack(side = "left", padx = (0, 10))
 search_bar.bind("<Return>", lambda event: search_handler())
+
+# --- Refresh button ---
+refresh_image = Image.open(refresh_image_path)
+refresh_button = CTkButton(app, image = CTkImage(dark_image = refresh_image, light_image = refresh_image), text = "", width = 30, height = 30, fg_color = "white", hover_color = "gray",command = lambda: refresh())
+refresh_button.place(x = 230, y = 71)
 
 # --- status placeholder ---
 status_label = CTkLabel(app, text = "", font = ("Segoe UI", 15), text_color = "#f71616")
@@ -306,17 +309,35 @@ sunset_label.grid(row = 2, column = 0)
 sunset_time = CTkLabel(sunrise_sunset_frame, text = "Sunset time", font = ("Segoe UI", 20))
 sunset_time.grid(row = 3, column = 0)
 
-# --- wind speed ---
+# --- wind speed / degrees ---
 wind_image = Image.open(wind_image_path)
 wind_speed_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
 wind_speed_frame.place(x = 267.5, y = 440)
 wind_speed_frame.grid_propagate(False)
 wind_speed_frame.columnconfigure(0, weight = 1)
-wind_speed_frame.rowconfigure((0, 1, 2, 3), weight = 1)
+wind_speed_frame.rowconfigure((0, 1, 2), weight = 1)
 
 wind_image_placeholder = CTkLabel(wind_speed_frame, text = "", image = CTkImage(dark_image = wind_image , light_image = wind_image, size = (50, 50)))
 wind_image_placeholder.grid(row = 0, column = 0)
 wind_speed_label = CTkLabel(wind_speed_frame, text = "km/h", font = ("Segoe UI", 25))
-wind_speed_label.grid(row = 1, column = 0)
+wind_speed_label.grid(row = 1, column = 0, pady = (0, 40))
+
+# --- Wind degrees ---
+arrow_image = Image.open(arrow_image_path)
+
+wind_degrees_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
+wind_degrees_frame.place(x = 437.5, y = 440)
+wind_degrees_frame.grid_propagate(False)
+wind_degrees_frame.columnconfigure(0, weight = 1)
+wind_degrees_frame.rowconfigure((0, 1, 2), weight = 1)
+
+init_arrow_image = CTkImage(light_image = arrow_image, dark_image = arrow_image, size = (80, 80))
+wind_arrow = CTkLabel(wind_degrees_frame, text = "", image = init_arrow_image)
+wind_arrow.grid(row = 0, column = 0)
+wind_degrees_label = CTkLabel(wind_degrees_frame, text = "°", font = ("Segoe UI", 25))
+wind_degrees_label.grid(row = 1, column = 0)
+
+search_bar.insert(0, "New York")
+search_handler()
 
 app.mainloop()
