@@ -113,7 +113,8 @@ def update_favourite_list():
                     temp_text = f"{temperature}°"
                 else:
                     temp_text = "N/A"
-        except:
+        except Exception as e:
+            status_label.configure(text = f"Favourite list update error: {e}")
             temp_text = "N/A"
 
         favourite_buttons = CTkButton(favourite_frame, text = f"{place_text} | {temp_text}", fg_color = "#2f2f2f", border_width= 2, corner_radius = 5, height = 40, font = ("Segoe UI", 20), border_color= "#333333", hover_color = "gray", command = lambda p = place: search_by_name(p))
@@ -150,7 +151,6 @@ def search_handler():
             weather_data_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid={api_key}"
             response2 = requests.get(weather_data_url)
             if response2.status_code == 200:
-                last_search = search_bar_entry
                 status_label.configure(text = "")
                 data2 = response2.json()
                 temperature = int(data2["main"]["temp"])
@@ -224,7 +224,6 @@ def search_handler():
             status_label.configure(text = "Place not found.")
     else:
         status_label.configure(text = "Error:" + response1.status_code + response1.text)
-    search_bar.delete(0, "end")
 
 # --- favourite button ---
 star_image = Image.open(star_path)
