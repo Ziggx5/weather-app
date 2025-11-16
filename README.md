@@ -39,5 +39,8 @@ This project is licensed under the MIT License.
 Copyright © 2025 Maj Sedonja
 
 👤 Author
+
 Maj Sedonja
 Github: https://github.com/Ziggx5
+
+If you enjoy this project, consider giving the repository a ⭐
