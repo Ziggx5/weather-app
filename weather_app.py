@@ -116,7 +116,7 @@ def update_favourite_list():
                     if units_switch.get() == 1:
                         temp_text = f"{temperature}°"
                     else:
-                        temperature_fahrenheit = (temperature * 1.8) + 32
+                        temperature_fahrenheit = int((temperature * 1.8) + 32)
                         temp_text = f"{temperature_fahrenheit}°F"
                 else:
                     temp_text = "N/A"
@@ -126,6 +126,11 @@ def update_favourite_list():
 
         favourite_buttons = CTkButton(favourite_frame, text = f"{place_text} | {temp_text}", fg_color = "#2f2f2f", border_width= 2, corner_radius = 5, height = 40, font = ("Segoe UI", 20), border_color= "#333333", hover_color = "gray", command = lambda p = place: search_by_name(p))
         favourite_buttons.pack(pady = 5, padx = 5, fill = "x")
+
+
+def change_units():
+    search_handler()
+    update_favourite_list()
 
 def refresh():
     update_favourite_list()
@@ -161,6 +166,7 @@ def search_handler():
                 temperature = int(data2["main"]["temp"])
                 feels_like = int(data2["main"]["feels_like"])
                 description = data2["weather"][0]["description"]
+                wind_speed = data2["wind"]["speed"]
                 if units_switch.get() == 1:
                     
                     if temperature <= -10:
@@ -178,9 +184,11 @@ def search_handler():
 
                     temperature_label.configure(text = str(temperature) + "°", text_color = temp_color)
                     description_label.configure(text = description + " | Feels like: " + str(feels_like) + "°")
+                    wind_speed_label.configure(text = str(wind_speed) + "km/h")
                 else:
-                    temperature_fahrenheit = (temperature * 1.8) + 32
-                    feels_like_fahrenheit = (feels_like * 1.8) + 32
+                    temperature_fahrenheit = int((temperature * 1.8) + 32)
+                    feels_like_fahrenheit = int((feels_like * 1.8) + 32)
+                    wind_speed_mph = int(wind_speed * 0.6213711922)
                     if temperature_fahrenheit <= 14:
                         temp_color = "#2196F3"
                     elif 14 < temperature_fahrenheit <= 32:
@@ -196,12 +204,12 @@ def search_handler():
 
                     temperature_label.configure(text = str(temperature_fahrenheit) + "°F", text_color = temp_color)
                     description_label.configure(text = description + " | Feels like: " + str(feels_like_fahrenheit) + "°F")
+                    wind_speed_label.configure(text = str(wind_speed_mph) + "mph")
 
                 humidity = data2["main"]["humidity"]
                 sunrise_unix_timestamp = data2["sys"]["sunrise"]
                 sunset_unix_timestamp = data2["sys"]["sunset"]
                 timezone_offset = data2["timezone"]
-                wind_speed = data2["wind"]["speed"]
                 wind_degrees = data2["wind"]["deg"]
                 sunrise = (datetime.fromtimestamp(sunrise_unix_timestamp, tz = timezone.utc) + timedelta(seconds = timezone_offset))
                 sunrise = sunrise.strftime("%H:%M")
@@ -233,7 +241,6 @@ def search_handler():
                 precipitation_measure.configure(text = str(precipitation) + "mm")
                 sunrise_time.configure(text = str(sunrise))
                 sunset_time.configure(text = str(sunset))
-                wind_speed_label.configure(text = str(wind_speed) + "km/h")
                 wind_degrees_label.configure(text = str(wind_degrees) + "°")
                 rotate_arrow = arrow_image.rotate(-wind_degrees + 180)
                 rotated_arrow = CTkImage(light_image = rotate_arrow, dark_image = rotate_arrow, size = (80, 80))
@@ -299,7 +306,7 @@ precipitation_label = CTkLabel(precipitation_frame, image = images["precipitatio
 precipitation_label.grid(row = 0, column = 0)
 
 precipitation_measure = CTkLabel(precipitation_frame, text = "mm", font = ("Segoe UI", 30))
-precipitation_measure.grid(row = 1, column = 0, pady = (0, 40))
+precipitation_measure.grid(row = 1, column = 0, pady = (0, 45))
 
 # --- Sunrise and sunset ---
 sunrise_sunset_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
@@ -346,7 +353,7 @@ wind_degrees_label = CTkLabel(wind_degrees_frame, text = "°", font = ("Segoe UI
 wind_degrees_label.grid(row = 1, column = 0)
 
 # --- Units switch ---
-units_switch = CTkSwitch(app, text = "metric", command = lambda: search_handler())
+units_switch = CTkSwitch(app, text = "metric", command = lambda: change_units())
 units_switch.place(x = 10, y = 670)
 
 search_bar.insert(0, "New York")
