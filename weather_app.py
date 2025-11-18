@@ -33,6 +33,8 @@ for file_name in os.listdir(images_path):
     open_image = Image.open(filepath)
     if "search_icon.png" in file_name or "star.png" in file_name or "star2.png" in file_name or "refresh.png" in file_name:
         images[file_name] = CTkImage(light_image = open_image, dark_image = open_image, size = (20, 20))
+    elif "precipitation.png" in file_name:
+        images[file_name] = CTkImage(light_image = open_image, dark_image = open_image, size = (60, 60))
     else:
         images[file_name] = CTkImage(light_image = open_image, dark_image = open_image, size = (40, 40))
 
@@ -47,11 +49,15 @@ app.resizable(False, False)
 # --- Frame for favourite places ---
 favourite_frame = CTkFrame(app, fg_color = "transparent", border_color = "#3a3a3a", border_width = 2)
 favourite_frame.grid_propagate(False)
-favourite_frame.place(x = 0, y = 70, relheight = 0.86, relwidth = 0.28)
+favourite_frame.place(x = 0, y = 70, relheight = 0.75, relwidth = 0.28)
 
 # --- Frame for search bar and search button ---
 search_frame = CTkFrame(app, fg_color = "transparent")
 search_frame.place(x = 10, y = 10)
+
+# --- status placeholder ---
+status_label = CTkLabel(app, text = "", font = ("Segoe UI", 15), text_color = "#f71616")
+status_label.place(x = 10, y = 40)
 
 def load_favourites():
     try:
@@ -107,7 +113,11 @@ def update_favourite_list():
                 if response2.status_code == 200:
                     data2 = response2.json()
                     temperature = int(data2["main"]["temp"])
-                    temp_text = f"{temperature}°"
+                    if units_switch.get() == 1:
+                        temp_text = f"{temperature}°"
+                    else:
+                        temperature_fahrenheit = (temperature * 1.8) + 32
+                        temp_text = f"{temperature_fahrenheit}°F"
                 else:
                     temp_text = "N/A"
         except Exception as e:
@@ -116,8 +126,6 @@ def update_favourite_list():
 
         favourite_buttons = CTkButton(favourite_frame, text = f"{place_text} | {temp_text}", fg_color = "#2f2f2f", border_width= 2, corner_radius = 5, height = 40, font = ("Segoe UI", 20), border_color= "#333333", hover_color = "gray", command = lambda p = place: search_by_name(p))
         favourite_buttons.pack(pady = 5, padx = 5, fill = "x")
-
-update_favourite_list()
 
 def refresh():
     update_favourite_list()
@@ -153,6 +161,42 @@ def search_handler():
                 temperature = int(data2["main"]["temp"])
                 feels_like = int(data2["main"]["feels_like"])
                 description = data2["weather"][0]["description"]
+                if units_switch.get() == 1:
+                    
+                    if temperature <= -10:
+                        temp_color = "#2196F3"
+                    elif -10 < temperature <= 0:
+                        temp_color = "#4FC3F7"
+                    elif 0 < temperature <= 10:
+                        temp_color = "#81D4FA"
+                    elif 10 < temperature <= 20:
+                        temp_color = "#FFF176"
+                    elif 20 < temperature <= 30:
+                        temp_color = "#FFB74D"
+                    else:
+                        temp_color = "#FF7043"
+
+                    temperature_label.configure(text = str(temperature) + "°", text_color = temp_color)
+                    description_label.configure(text = description + " | Feels like: " + str(feels_like) + "°")
+                else:
+                    temperature_fahrenheit = (temperature * 1.8) + 32
+                    feels_like_fahrenheit = (feels_like * 1.8) + 32
+                    if temperature_fahrenheit <= 14:
+                        temp_color = "#2196F3"
+                    elif 14 < temperature_fahrenheit <= 32:
+                        temp_color = "#4FC3F7"
+                    elif 32 < temperature_fahrenheit <= 50:
+                        temp_color = "#81D4FA"
+                    elif 50 < temperature_fahrenheit <= 68:
+                        temp_color = "#FFF176"
+                    elif 68 < temperature_fahrenheit <= 86:
+                        temp_color = "#FFB74D"
+                    else:
+                        temp_color = "#FF7043"
+
+                    temperature_label.configure(text = str(temperature_fahrenheit) + "°F", text_color = temp_color)
+                    description_label.configure(text = description + " | Feels like: " + str(feels_like_fahrenheit) + "°F")
+
                 humidity = data2["main"]["humidity"]
                 sunrise_unix_timestamp = data2["sys"]["sunrise"]
                 sunset_unix_timestamp = data2["sys"]["sunset"]
@@ -179,28 +223,12 @@ def search_handler():
                 else:
                     place_name = data1[0]["name"]
                 
-                # --- Temperature color ---
-                if temperature <= -10:
-                    temp_color = "#2196F3"
-                elif -10 < temperature <= 0:
-                    temp_color = "#4FC3F7"
-                elif 0 < temperature <= 10:
-                    temp_color = "#81D4FA"
-                elif 10 < temperature <= 20:
-                    temp_color = "#FFF176"
-                elif 20 < temperature <= 30:
-                    temp_color = "#FFB74D"
-                else:
-                    temp_color = "#FF7043"
-                
                 if place_name in favourites:
                     favourite_button.configure(image = images["star2.png"])
                 else:
                     favourite_button.configure(image = images["star.png"])
 
                 place_name_label.configure(text = place_name)
-                temperature_label.configure(text = str(temperature) + "°", text_color = temp_color)
-                description_label.configure(text = description+ " | Feels like: " + str(feels_like) + "°")
                 humidity_percentage.configure(text = str(humidity) + "%")
                 precipitation_measure.configure(text = str(precipitation) + "mm")
                 sunrise_time.configure(text = str(sunrise))
@@ -210,7 +238,6 @@ def search_handler():
                 rotate_arrow = arrow_image.rotate(-wind_degrees + 180)
                 rotated_arrow = CTkImage(light_image = rotate_arrow, dark_image = rotate_arrow, size = (80, 80))
                 wind_arrow.configure(image = rotated_arrow)
-
                 
             else:
                 print("Error getting weather info", response2.status_code, response2.text)
@@ -236,10 +263,6 @@ search_bar.bind("<Return>", lambda event: search_handler())
 # --- Refresh button ---
 refresh_button = CTkButton(app, image = images["refresh.png"], text = "", width = 30, height = 30, fg_color = "white", hover_color = "gray",command = lambda: refresh())
 refresh_button.place(x = 230, y = 71)
-
-# --- status placeholder ---
-status_label = CTkLabel(app, text = "", font = ("Segoe UI", 15), text_color = "#f71616")
-status_label.place(x = 10, y = 40)
 
 # --- Place name placeholder ---
 place_name_label = CTkLabel(app, text = "", font = ("Segoe UI", 40))
@@ -322,7 +345,13 @@ wind_arrow.grid(row = 0, column = 0)
 wind_degrees_label = CTkLabel(wind_degrees_frame, text = "°", font = ("Segoe UI", 25))
 wind_degrees_label.grid(row = 1, column = 0)
 
+# --- Units switch ---
+units_switch = CTkSwitch(app, text = "metric", command = lambda: search_handler())
+units_switch.place(x = 10, y = 670)
+
 search_bar.insert(0, "New York")
 search_handler()
+
+update_favourite_list()
 
 app.mainloop()
