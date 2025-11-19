@@ -15,16 +15,59 @@ if getattr(sys, 'frozen', False):
 else:
     base_path = os.path.dirname(os.path.abspath(__file__))
 
+config_path = os.path.join(base_path, "config.json")
 favourites_path = os.path.join(base_path, "favourites.json")
 app_icon_path = os.path.join(base_path, "images", "weather_icon.ico")
 arrow_image_path = os.path.join(base_path, "images", "arrow.png")
 load_dotenv()
 api_key = os.getenv("OPENWEATHER_API_KEY")
 
-# --- json file ---
+default_config = {
+    "units": "metric",
+    "default_city": "New York"
+}
+
+# --- favourites json file ---
 if not os.path.exists(favourites_path):
     with open (favourites_path, "w") as f:
         json.dump([], f)
+
+def load_favourites():
+    try:
+        with open (favourites_path, "r") as f:
+            return json.load(f)
+    except:
+        return []
+
+favourites = load_favourites()
+
+def save_favourites(favourites):
+    with open (favourites_path, "w") as f:
+        json.dump(favourites, f, indent = 4)
+
+# --- config json file ---
+if not os.path.exists(config_path):
+    with open (config_path, "w") as f:
+        json.dump(default_config, f, indent = 4)
+
+def load_config():
+    try:
+        with open (config_path, "r") as f:
+            return json.load(f)
+    except:
+        return default_config.copy()
+
+def save_config(config):
+    with open (config_path, "w") as f:
+        json.dump(config, f, indent = 4)
+
+def units_switch_check():
+    if config["units"] == "imperial":
+        units_switch.select()
+    else:
+        units_switch.deselect()
+
+config = load_config()
 
 images_path = os.path.join(base_path, "images")
 images = {}
@@ -58,19 +101,6 @@ search_frame.place(x = 10, y = 10)
 # --- status placeholder ---
 status_label = CTkLabel(app, text = "", font = ("Segoe UI", 15), text_color = "#f71616")
 status_label.place(x = 10, y = 40)
-
-def load_favourites():
-    try:
-        with open (favourites_path, "r") as f:
-            return json.load(f)
-    except:
-        return []
-
-favourites = load_favourites()
-
-def save_favourites(favourites):
-    with open (favourites_path, "w") as f:
-        json.dump(favourites, f, indent = 4)
 
 def toggle_favourite(place):
     if not place:
@@ -113,7 +143,7 @@ def update_favourite_list():
                 if response2.status_code == 200:
                     data2 = response2.json()
                     temperature = int(data2["main"]["temp"])
-                    if units_switch.get() == 1:
+                    if units_switch.get() == 0:
                         temp_text = f"{temperature}°"
                     else:
                         temperature_fahrenheit = int((temperature * 1.8) + 32)
@@ -127,13 +157,19 @@ def update_favourite_list():
         favourite_buttons = CTkButton(favourite_frame, text = f"{place_text} | {temp_text}", fg_color = "#2f2f2f", border_width= 2, corner_radius = 5, height = 40, font = ("Segoe UI", 20), border_color= "#333333", hover_color = "gray", command = lambda p = place: search_by_name(p))
         favourite_buttons.pack(pady = 5, padx = 5, fill = "x")
 
-
 def change_units():
     search_handler()
     update_favourite_list()
+    if units_switch.get() == 1:
+        config["units"] = "imperial"
+        save_config(config)
+    else:
+        config["units"] = "metric"
+        save_config(config)
 
 def refresh():
     update_favourite_list()
+    search_handler()
 
 def search_by_name(place_name):
     search_bar.delete(0, "end")
@@ -167,7 +203,7 @@ def search_handler():
                 feels_like = int(data2["main"]["feels_like"])
                 description = data2["weather"][0]["description"]
                 wind_speed = data2["wind"]["speed"]
-                if units_switch.get() == 1:
+                if units_switch.get() == 0:
                     
                     if temperature <= -10:
                         temp_color = "#2196F3"
@@ -353,8 +389,9 @@ wind_degrees_label = CTkLabel(wind_degrees_frame, text = "°", font = ("Segoe UI
 wind_degrees_label.grid(row = 1, column = 0)
 
 # --- Units switch ---
-units_switch = CTkSwitch(app, text = "metric", command = lambda: change_units())
+units_switch = CTkSwitch(app, text = "imperial", command = lambda: change_units())
 units_switch.place(x = 10, y = 670)
+units_switch_check()
 
 search_bar.insert(0, "New York")
 search_handler()
