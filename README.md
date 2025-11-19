@@ -16,8 +16,9 @@ Image from latest version (1.5)
 - 💧 **Humidity and wind speed**
 - 🌪️ **Wind speed and angle**
 - 🔁 **Refresh button to update all widgets**
-- 📁 **Smart path handling (works in normal Python file and compiled `.exe`)**
-- 🖼️ **Custom icons + responsive UI built with CustomTkinter**
+- 📁 **Smart path handling** (works in normal Python file and compiled `.exe`)
+- 🖼️ **Custom icons** + responsive UI built with CustomTkinter
+- 🏙️ **Default city** choose a city that shows on start up
 ---
 
 🚀 Installation (Executable)
