@@ -4,8 +4,7 @@ Modern desktop app built with **Python**, **CustomTkinter**, and **OpenWeather A
 A clean UI focused on minimalism, real-time data, favourite locations all in one simple desktop app.
 
 Image from latest version (1.4)
-<img width="800" height="728" alt="image" src="https://github.com/user-attachments/assets/ea828dce-9735-4bcd-8090-ca55f06e6a42" />
-
+<img width="828" height="752" alt="image" src="https://github.com/user-attachments/assets/42985fe6-a9ba-41b8-946a-cb8190a838bf" />
 
 ---
 ✨ Features
