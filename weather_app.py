@@ -74,7 +74,8 @@ images = {}
 for file_name in os.listdir(images_path):
     filepath = os.path.join(images_path, file_name)
     open_image = Image.open(filepath)
-    if "search_icon.png" in file_name or "star.png" in file_name or "star2.png" in file_name or "refresh.png" in file_name:
+    big_icons = ("search_icon.png", "star.png", "star2.png", "refresh.png", "padlock1.png", "padlock2.png")
+    if file_name in big_icons:
         images[file_name] = CTkImage(light_image = open_image, dark_image = open_image, size = (20, 20))
     elif "precipitation.png" in file_name:
         images[file_name] = CTkImage(light_image = open_image, dark_image = open_image, size = (60, 60))
@@ -176,6 +177,12 @@ def search_by_name(place_name):
     search_bar.insert(0, place_name)
     search_handler()
 
+def default_place_handler():
+    default_place_button.configure(image = images["padlock2.png"])
+    config["default_city"] = search_bar.get()
+    save_config(config)
+    search_handler()
+
 def search_handler():
     search_bar_entry = search_bar.get().strip()
     if search_bar_entry == "":
@@ -203,6 +210,15 @@ def search_handler():
                 feels_like = int(data2["main"]["feels_like"])
                 description = data2["weather"][0]["description"]
                 wind_speed = data2["wind"]["speed"]
+                humidity = data2["main"]["humidity"]
+                sunrise_unix_timestamp = data2["sys"]["sunrise"]
+                sunset_unix_timestamp = data2["sys"]["sunset"]
+                timezone_offset = data2["timezone"]
+                wind_degrees = data2["wind"]["deg"]
+                sunrise = (datetime.fromtimestamp(sunrise_unix_timestamp, tz = timezone.utc) + timedelta(seconds = timezone_offset))
+                sunrise = sunrise.strftime("%H:%M")
+                sunset = (datetime.fromtimestamp(sunset_unix_timestamp, tz = timezone.utc) + timedelta(seconds = timezone_offset))
+                sunset = sunset.strftime("%H:%M")
                 if units_switch.get() == 0:
                     
                     if temperature <= -10:
@@ -242,15 +258,11 @@ def search_handler():
                     description_label.configure(text = description + " | Feels like: " + str(feels_like_fahrenheit) + "°F")
                     wind_speed_label.configure(text = str(wind_speed_mph) + "mph")
 
-                humidity = data2["main"]["humidity"]
-                sunrise_unix_timestamp = data2["sys"]["sunrise"]
-                sunset_unix_timestamp = data2["sys"]["sunset"]
-                timezone_offset = data2["timezone"]
-                wind_degrees = data2["wind"]["deg"]
-                sunrise = (datetime.fromtimestamp(sunrise_unix_timestamp, tz = timezone.utc) + timedelta(seconds = timezone_offset))
-                sunrise = sunrise.strftime("%H:%M")
-                sunset = (datetime.fromtimestamp(sunset_unix_timestamp, tz = timezone.utc) + timedelta(seconds = timezone_offset))
-                sunset = sunset.strftime("%H:%M")
+                if search_bar.get() == config["default_city"]:
+                    default_place_button.configure(image = images["padlock1.png"], state = "disabled", fg_color = "gray", hover_color = "gray")
+                else:
+                    default_place_button.configure(image = images["padlock2.png"], state = "enabled", fg_color = "white")
+
 
                 # --- looking for rain ---
                 if "rain" in data2:
@@ -393,7 +405,11 @@ units_switch = CTkSwitch(app, text = "imperial", command = lambda: change_units(
 units_switch.place(x = 10, y = 670)
 units_switch_check()
 
-search_bar.insert(0, "New York")
+# --- default place switch ---
+default_place_button = CTkButton(app, text = "", image = images["padlock2.png"], width = 30, height = 30, fg_color = "white", hover_color = "gray", command = lambda: default_place_handler())
+default_place_button.place(x = 687.5, y = 40)
+
+search_bar.insert(0, config["default_city"])
 search_handler()
 
 update_favourite_list()
