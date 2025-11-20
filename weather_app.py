@@ -69,6 +69,7 @@ def units_switch_check():
 
 config = load_config()
 
+# --- Image loader ---
 images_path = os.path.join(base_path, "images")
 images = {}
 for file_name in os.listdir(images_path):
@@ -107,24 +108,31 @@ def toggle_favourite(place):
     if not place:
         status_label.configure(text = "No place selected yet.")
         return
+
+    if  place not in favourites and len(favourites) == 10:
+        status_label.configure(text = "Limit reached.")
+        return
+
     if place in favourites:
         favourites.remove(place)
         save_favourites(favourites)
         favourite_button.configure(image = images["star.png"])
         status_label.configure(text = "")
+        print(len(favourites))
 
     else:
         favourites.append(place)
         save_favourites(favourites)
         favourite_button.configure(image = images["star2.png"])
         status_label.configure(text = "")
+        print(len(favourites))
     update_favourite_list()
 
 def update_favourite_list():
     for widget in favourite_frame.winfo_children():
         widget.destroy()
     
-    for place in favourites:
+    for place in favourites[:10]:
         if len(place) > 10:
             place_text = place[:10] + "..."
         else:
