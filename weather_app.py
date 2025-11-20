@@ -61,11 +61,11 @@ def save_config(config):
     with open (config_path, "w") as f:
         json.dump(config, f, indent = 4)
 
-def units_switch_check():
+def units_switch_check(switch):
     if config["units"] == "imperial":
-        units_switch.select()
+        switch.select()
     else:
-        units_switch.deselect()
+        switch.deselect()
 
 config = load_config()
 
@@ -75,7 +75,7 @@ images = {}
 for file_name in os.listdir(images_path):
     filepath = os.path.join(images_path, file_name)
     open_image = Image.open(filepath)
-    big_icons = ("search_icon.png", "star.png", "star2.png", "refresh.png", "padlock1.png", "padlock2.png")
+    big_icons = ("search_icon.png", "star.png", "star2.png", "refresh.png", "padlock1.png", "padlock2.png", "settings.png")
     if file_name in big_icons:
         images[file_name] = CTkImage(light_image = open_image, dark_image = open_image, size = (20, 20))
     elif "precipitation.png" in file_name:
@@ -152,7 +152,7 @@ def update_favourite_list():
                 if response2.status_code == 200:
                     data2 = response2.json()
                     temperature = int(data2["main"]["temp"])
-                    if units_switch.get() == 0:
+                    if config["units"] == "metric":
                         temp_text = f"{temperature}°"
                     else:
                         temperature_fahrenheit = int((temperature * 1.8) + 32)
@@ -166,15 +166,16 @@ def update_favourite_list():
         favourite_buttons = CTkButton(favourite_frame, text = f"{place_text} | {temp_text}", fg_color = "#2f2f2f", border_width= 2, corner_radius = 5, height = 40, font = ("Segoe UI", 20), border_color= "#333333", hover_color = "gray", command = lambda p = place: search_by_name(p))
         favourite_buttons.pack(pady = 5, padx = 5, fill = "x")
 
-def change_units():
-    search_handler()
-    update_favourite_list()
-    if units_switch.get() == 1:
+def change_units(switch):
+    if switch.get() == 1:
         config["units"] = "imperial"
         save_config(config)
     else:
         config["units"] = "metric"
         save_config(config)
+
+    search_handler()
+    update_favourite_list()
 
 def refresh():
     update_favourite_list()
@@ -227,7 +228,7 @@ def search_handler():
                 sunrise = sunrise.strftime("%H:%M")
                 sunset = (datetime.fromtimestamp(sunset_unix_timestamp, tz = timezone.utc) + timedelta(seconds = timezone_offset))
                 sunset = sunset.strftime("%H:%M")
-                if units_switch.get() == 0:
+                if config["units"] == "metric":
                     
                     if temperature <= -10:
                         temp_color = "#2196F3"
@@ -310,6 +311,22 @@ def search_handler():
     else:
         status_label.configure(text = "Error:" + response1.status_code + response1.text)
 
+def open_settings_window():
+    settings = CTkToplevel()
+    settings.title("Settings")
+    settings.geometry("150x200")
+    settings.resizable(False, False)
+    
+    # --- Units switch ---
+    settings_units_switch = CTkSwitch(settings, text = "imperial", command = lambda: change_units(settings_units_switch))
+    settings_units_switch.place(x = 10, y = 10)
+    units_switch_check(settings_units_switch)
+
+    # --- Automatic refresh ---
+    automatic_refresh_label = CTkCheckBox(settings, text = "Auto refresh", hover_color = "darkgrey", fg_color = "gray")
+    automatic_refresh_label.place(x = 10, y = 40)
+
+
 # --- favourite button ---
 favourite_button = CTkButton(app, text = "", image = images["star.png"], width = 30, height = 30, fg_color = "white", command = lambda: toggle_favourite(place_name_label.cget("text")), hover_color = "gray")
 favourite_button.place(x = 727.5, y = 40)
@@ -362,7 +379,7 @@ precipitation_label = CTkLabel(precipitation_frame, image = images["precipitatio
 precipitation_label.grid(row = 0, column = 0)
 
 precipitation_measure = CTkLabel(precipitation_frame, text = "mm", font = ("Segoe UI", 30))
-precipitation_measure.grid(row = 1, column = 0, pady = (0, 45))
+precipitation_measure.grid(row = 1, column = 0, pady = (0, 40))
 
 # --- Sunrise and sunset ---
 sunrise_sunset_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
@@ -408,14 +425,13 @@ wind_arrow.grid(row = 0, column = 0)
 wind_degrees_label = CTkLabel(wind_degrees_frame, text = "°", font = ("Segoe UI", 25))
 wind_degrees_label.grid(row = 1, column = 0)
 
-# --- Units switch ---
-units_switch = CTkSwitch(app, text = "imperial", command = lambda: change_units())
-units_switch.place(x = 10, y = 670)
-units_switch_check()
-
 # --- default place switch ---
 default_place_button = CTkButton(app, text = "", image = images["padlock2.png"], width = 30, height = 30, fg_color = "white", hover_color = "gray", command = lambda: default_place_handler())
 default_place_button.place(x = 687.5, y = 40)
+
+# --- settings button ---
+settings_button = CTkButton(app, text = "", image = images["settings.png"], width = 30, height = 30, fg_color = "white", hover_color = "gray", command = lambda: open_settings_window())
+settings_button.place(x = 230, y = 10)
 
 search_bar.insert(0, config["default_city"])
 search_handler()
