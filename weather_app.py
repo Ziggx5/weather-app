@@ -28,9 +28,12 @@ default_config = {
 }
 
 # --- favourites json file ---
-if not os.path.exists(favourites_path):
-    with open (favourites_path, "w") as f:
-        json.dump([], f)
+def favourite_json_create():
+    if not os.path.exists(favourites_path):
+        with open (favourites_path, "w") as f:
+            json.dump([], f)
+
+favourite_json_create()
 
 def load_favourites():
     try:
@@ -85,7 +88,7 @@ for file_name in os.listdir(images_path):
 
 # --- App config ---
 app = CTk()
-app.geometry("800x700")
+app.geometry("800x730")
 app.title("Weather")
 app.iconphoto(True, ImageTk.PhotoImage(file = app_icon_path))
 app.configure(fg_color = "#242424")
@@ -103,6 +106,13 @@ search_frame.place(x = 10, y = 10)
 # --- status placeholder ---
 status_label = CTkLabel(app, text = "", font = ("Segoe UI", 15), text_color = "#f71616")
 status_label.place(x = 10, y = 40)
+
+# --- Forecast frame ---
+forecast_frame = CTkFrame(app, fg_color = "#2b2b2b", border_color = "#3a3a3a", border_width = 2, width = 490, height = 80)
+forecast_frame.grid_propagate(False)
+forecast_frame.columnconfigure((0, 1, 2, 3, 4), weight = 1)
+forecast_frame.rowconfigure((0, 1, 2), weight = 1)
+forecast_frame.place(x = 267.5, y = 260)
 
 def toggle_favourite(place):
     if not place:
@@ -195,6 +205,7 @@ def default_place_handler():
 def favourite_cleaner():
     try:
         os.remove(favourites_path)
+        favourite_json_create()
         refresh()
     except Exception as e:
         print(e)
@@ -219,6 +230,7 @@ def search_handler():
             # --- Get weather and forecast info ---
             weather_data_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid={api_key}"
             response2 = requests.get(weather_data_url)
+            forecast_handler(search_bar_entry)
             if response2.status_code == 200:
                 status_label.configure(text = "")
                 data2 = response2.json()
@@ -318,6 +330,20 @@ def search_handler():
     else:
         status_label.configure(text = "Error:" + response1.status_code + response1.text)
 
+def forecast_handler(entry):
+    for widget in forecast_frame.winfo_children():
+        widget.destroy()
+
+    forecast_data_url = f"https://api.openweathermap.org/data/2.5/forecast?q={entry}&units=metric&appid={api_key}"
+    response3 = requests.get(forecast_data_url)
+    data3 = response3.json()
+
+    for i, item in enumerate(data3["list"][:5]):
+        forecast_temperature = int(item["main"]["temp"])
+        forecast_temperature_label = CTkLabel(forecast_frame, text = forecast_temperature) # Not finished yet
+        forecast_temperature_label.pack()
+
+
 def open_settings_window():
     settings = CTkToplevel()
     settings.title("Settings")
@@ -364,7 +390,7 @@ description_label.place(x = 512.5, y = 230, anchor = "center")
 
 # --- Humidity ---
 humidity_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
-humidity_frame.place(x = 267.5, y = 270)
+humidity_frame.place(x = 267.5, y = 360)
 humidity_frame.grid_propagate(False)
 humidity_frame.grid_columnconfigure(0, weight = 1)
 humidity_frame.grid_rowconfigure((0, 1, 2), weight = 1)
@@ -376,7 +402,7 @@ humidity_percentage.grid(row = 1, column = 0, pady = (0, 30))
 
 # --- precipitation ---
 precipitation_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
-precipitation_frame.place(x = 437.5, y = 270)
+precipitation_frame.place(x = 437.5, y = 360)
 precipitation_frame.grid_propagate(False)
 precipitation_frame.grid_columnconfigure(0, weight = 1)
 precipitation_frame.grid_rowconfigure((0, 1, 2), weight = 1)
@@ -389,7 +415,7 @@ precipitation_measure.grid(row = 1, column = 0, pady = (0, 40))
 
 # --- Sunrise and sunset ---
 sunrise_sunset_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
-sunrise_sunset_frame.place(x = 607.5, y = 270)
+sunrise_sunset_frame.place(x = 607.5, y = 360)
 sunrise_sunset_frame.grid_propagate(False)
 sunrise_sunset_frame.grid_columnconfigure(0, weight = 1)
 sunrise_sunset_frame.grid_rowconfigure((0, 1, 2, 3), weight = 1)
@@ -406,7 +432,7 @@ sunset_time.grid(row = 3, column = 0)
 
 # --- wind speed / degrees ---
 wind_speed_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
-wind_speed_frame.place(x = 267.5, y = 440)
+wind_speed_frame.place(x = 267.5, y = 530)
 wind_speed_frame.grid_propagate(False)
 wind_speed_frame.columnconfigure(0, weight = 1)
 wind_speed_frame.rowconfigure((0, 1, 2), weight = 1)
@@ -420,7 +446,7 @@ wind_speed_label.grid(row = 1, column = 0, pady = (0, 40))
 arrow_image = Image.open(arrow_image_path)
 
 wind_degrees_frame = CTkFrame(app, fg_color = "#2b2b2b", width = 150, height = 150, border_color = "#3a3a3a", border_width = 2, corner_radius = 20)
-wind_degrees_frame.place(x = 437.5, y = 440)
+wind_degrees_frame.place(x = 437.5, y = 530)
 wind_degrees_frame.grid_propagate(False)
 wind_degrees_frame.columnconfigure(0, weight = 1)
 wind_degrees_frame.rowconfigure((0, 1, 2), weight = 1)
