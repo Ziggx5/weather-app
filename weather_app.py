@@ -75,7 +75,7 @@ images = {}
 for file_name in os.listdir(images_path):
     filepath = os.path.join(images_path, file_name)
     open_image = Image.open(filepath)
-    big_icons = ("search_icon.png", "star.png", "star2.png", "refresh.png", "padlock1.png", "padlock2.png", "settings.png")
+    big_icons = ("search_icon.png", "star.png", "star2.png", "refresh.png", "padlock1.png", "padlock2.png", "settings.png", "trash.png")
     if file_name in big_icons:
         images[file_name] = CTkImage(light_image = open_image, dark_image = open_image, size = (20, 20))
     elif "precipitation.png" in file_name:
@@ -191,6 +191,13 @@ def default_place_handler():
     config["default_city"] = search_bar.get()
     save_config(config)
     search_handler()
+
+def favourite_cleaner():
+    try:
+        os.remove(favourites_path)
+        refresh()
+    except Exception as e:
+        print(e)
 
 def search_handler():
     search_bar_entry = search_bar.get().strip()
@@ -314,18 +321,17 @@ def search_handler():
 def open_settings_window():
     settings = CTkToplevel()
     settings.title("Settings")
-    settings.geometry("150x200")
+    settings.geometry("250x200")
     settings.resizable(False, False)
     
-    # --- Units switch ---
     settings_units_switch = CTkSwitch(settings, text = "imperial", command = lambda: change_units(settings_units_switch))
     settings_units_switch.place(x = 10, y = 10)
     units_switch_check(settings_units_switch)
 
-    # --- Automatic refresh ---
-    automatic_refresh_label = CTkCheckBox(settings, text = "Auto refresh", hover_color = "darkgrey", fg_color = "gray")
-    automatic_refresh_label.place(x = 10, y = 40)
-
+    delete_favourites_label = CTkLabel(settings,text = "Favourite data")
+    delete_favourites_label.place(x = 10, y = 40)
+    delete_favourites_button = CTkButton(settings, image = images["trash.png"], text = "", fg_color = "white", hover_color = "gray", width = 30, height = 30, command = lambda: favourite_cleaner())
+    delete_favourites_button.place(x = 110, y = 40)
 
 # --- favourite button ---
 favourite_button = CTkButton(app, text = "", image = images["star.png"], width = 30, height = 30, fg_color = "white", command = lambda: toggle_favourite(place_name_label.cget("text")), hover_color = "gray")
