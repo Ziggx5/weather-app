@@ -110,32 +110,27 @@ status_label.place(x = 10, y = 40)
 # --- Forecast frame ---
 forecast_frame = CTkFrame(app, fg_color = "#2b2b2b", border_color = "#3a3a3a", border_width = 2, width = 490, height = 80)
 forecast_frame.grid_propagate(False)
-forecast_frame.columnconfigure((0, 1, 2, 3, 4), weight = 1)
-forecast_frame.rowconfigure((0, 1, 2), weight = 1)
+forecast_frame.columnconfigure((0, 1, 2, 3, 4, 5, 6, 7, 8, 9), weight = 1)
+forecast_frame.rowconfigure((0, 1), weight = 1)
 forecast_frame.place(x = 267.5, y = 260)
 
 def toggle_favourite(place):
     if not place:
         status_label.configure(text = "No place selected yet.")
         return
-
     if  place not in favourites and len(favourites) == 10:
         status_label.configure(text = "Limit reached.")
         return
-
     if place in favourites:
         favourites.remove(place)
         save_favourites(favourites)
         favourite_button.configure(image = images["star.png"])
         status_label.configure(text = "")
-        print(len(favourites))
-
     else:
         favourites.append(place)
         save_favourites(favourites)
         favourite_button.configure(image = images["star2.png"])
         status_label.configure(text = "")
-        print(len(favourites))
     update_favourite_list()
 
 def update_favourite_list():
@@ -314,7 +309,7 @@ def search_handler():
 
                 place_name_label.configure(text = place_name)
                 humidity_percentage.configure(text = str(humidity) + "%")
-                precipitation_measure.configure(text = str(precipitation) + "mm")
+                precipitation_measure.configure(text = str(precipitation) + " mm")
                 sunrise_time.configure(text = str(sunrise))
                 sunset_time.configure(text = str(sunset))
                 wind_degrees_label.configure(text = str(wind_degrees) + "°")
@@ -323,7 +318,6 @@ def search_handler():
                 wind_arrow.configure(image = rotated_arrow)
                 
             else:
-                print("Error getting weather info", response2.status_code, response2.text)
                 status_label.configure(text = "Error getting weather info" + response2.status_code + response2.text)
         else:
             status_label.configure(text = "Place not found.")
@@ -331,17 +325,27 @@ def search_handler():
         status_label.configure(text = "Error:" + response1.status_code + response1.text)
 
 def forecast_handler(entry):
-    for widget in forecast_frame.winfo_children():
-        widget.destroy()
+    try:
+        for widget in forecast_frame.winfo_children():
+            widget.destroy()
+        forecast_data_url = f"https://api.openweathermap.org/data/2.5/forecast?q={entry}&units=metric&appid={api_key}"
+        response3 = requests.get(forecast_data_url)
+        data3 = response3.json()
 
-    forecast_data_url = f"https://api.openweathermap.org/data/2.5/forecast?q={entry}&units=metric&appid={api_key}"
-    response3 = requests.get(forecast_data_url)
-    data3 = response3.json()
-
-    for i, item in enumerate(data3["list"][:5]):
-        forecast_temperature = int(item["main"]["temp"])
-        forecast_temperature_label = CTkLabel(forecast_frame, text = forecast_temperature) # Not finished yet
-        forecast_temperature_label.pack()
+        for i, item in enumerate(data3["list"][:10]):
+            forecast_temperature = int(item["main"]["temp"])
+            forecast_temperature_fahrenheit = (forecast_temperature * 1.8) + 32
+            forecast_time = datetime.fromtimestamp(item["dt"]).strftime("%H:%M")
+            if config["units"] == "metric":
+                forecast_temperature_label = CTkLabel(forecast_frame, text = f"{forecast_temperature}°", font = ("Segoe UI", 15))
+            else:
+                forecast_temperature_label = CTkLabel(forecast_frame, text = f"{forecast_temperature_fahrenheit}°F", font = ("Segoe UI", 13))
+            forecast_temperature_label.grid(row = 0, column = i)
+            forecast_time_label = CTkLabel(forecast_frame, text = forecast_time, font = ("Segoe UI", 13))
+            forecast_time_label.grid(row = 1, column = i)
+    except:
+        forecast_temperature_label = CTkLabel(forecast_frame, text = "No data.", font = ("Segoe UI", 20))
+        forecast_temperature_label.grid(row = 0, column = 0)
 
 
 def open_settings_window():
@@ -459,7 +463,7 @@ wind_degrees_label.grid(row = 1, column = 0)
 
 # --- default place switch ---
 default_place_button = CTkButton(app, text = "", image = images["padlock2.png"], width = 30, height = 30, fg_color = "white", hover_color = "gray", command = lambda: default_place_handler())
-default_place_button.place(x = 687.5, y = 40)
+default_place_button.place(x = 677.5, y = 40)
 
 # --- settings button ---
 settings_button = CTkButton(app, text = "", image = images["settings.png"], width = 30, height = 30, fg_color = "white", hover_color = "gray", command = lambda: open_settings_window())
