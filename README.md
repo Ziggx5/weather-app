@@ -37,7 +37,7 @@ Image from latest version (1.5)
 
 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the GPL-3.0 License.
 Copyright © 2025 Maj Sedonja
 
 👤 Author
