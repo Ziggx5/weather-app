@@ -19,6 +19,7 @@ Image from latest version (2.0)
 - 📁 **Smart path handling** (works in normal Python file and compiled `.exe`)
 - 🖼️ **Custom icons** + responsive UI built with CustomTkinter
 - 🏙️ **Default city** choose a city that shows on start up
+- 🌦️ **Forecast**
 ---
 
 🚀 Installation (Executable)
