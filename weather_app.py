@@ -1,5 +1,5 @@
 #Copyright © 2025 Maj Sedonja
-#Licensed under the MIT License. See LICENSE file for details.
+#Licensed under the GPL-3.0 License. See LICENSE file for details.
 import requests
 import json
 from customtkinter import *
