@@ -24,7 +24,8 @@ api_key = os.getenv("OPENWEATHER_API_KEY")
 
 default_config = {
     "units": "metric",
-    "default_city": "New York"
+    "default_city": "New York",
+    "time_format" : "24"
 }
 
 # --- favourites json file ---
@@ -69,6 +70,12 @@ def units_switch_check(switch):
         switch.select()
     else:
         switch.deselect()
+
+def time_format_switch_check(format_switch):
+    if config["time_format"] == "24":
+        format_switch.deselect()
+    else:
+        format_switch.select()
 
 config = load_config()
 
@@ -178,7 +185,6 @@ def change_units(switch):
     else:
         config["units"] = "metric"
         save_config(config)
-
     search_handler()
     update_favourite_list()
 
@@ -196,6 +202,16 @@ def default_place_handler():
     config["default_city"] = search_bar.get()
     save_config(config)
     search_handler()
+
+def time_format_handler(time_switch):
+    if time_switch.get() == 1:
+        config["time_format"] = "12"
+        save_config(config)
+    else:
+        config["time_format"] = "24"
+        save_config(config)
+    search_handler()
+    update_favourite_list()
 
 def favourite_cleaner():
     try:
@@ -239,10 +255,16 @@ def search_handler():
                 timezone_offset = data2["timezone"]
                 wind_degrees = data2["wind"]["deg"]
                 sunrise = (datetime.fromtimestamp(sunrise_unix_timestamp, tz = timezone.utc) + timedelta(seconds = timezone_offset))
-                sunrise = sunrise.strftime("%H:%M")
                 sunset = (datetime.fromtimestamp(sunset_unix_timestamp, tz = timezone.utc) + timedelta(seconds = timezone_offset))
-                sunset = sunset.strftime("%H:%M")
+                if config["time_format"] == "24":
+                    sunrise = sunrise.strftime("%H:%M")
+                    sunset = sunset.strftime("%H:%M")
+                else:
+                    sunrise = sunrise.strftime("%H %p")
+                    sunset = sunset.strftime("%H %p")
+
                 if config["units"] == "metric":
+
                     
                     if temperature <= -10:
                         temp_color = "#2196F3"
@@ -285,7 +307,6 @@ def search_handler():
                     default_place_button.configure(image = images["padlock1.png"], state = "disabled", fg_color = "gray", hover_color = "gray")
                 else:
                     default_place_button.configure(image = images["padlock2.png"], state = "enabled", fg_color = "white")
-
 
                 # --- looking for rain ---
                 if "rain" in data2:
@@ -335,18 +356,24 @@ def forecast_handler(entry):
         for i, item in enumerate(data3["list"][:10]):
             forecast_temperature = int(item["main"]["temp"])
             forecast_temperature_fahrenheit = (forecast_temperature * 1.8) + 32
-            forecast_time = datetime.fromtimestamp(item["dt"]).strftime("%H:%M")
+            forecast_time = datetime.fromtimestamp(item["dt"])
+            if config["time_format"] == "24":
+                forecast_time_format = forecast_time.strftime("%H:%M")
+                forecast_time_label = CTkLabel(forecast_frame, text = forecast_time_format, font = ("Segoe UI", 13))
+
+            else:
+                forecast_time_format = forecast_time.strftime("%H %p")
+                forecast_time_label = CTkLabel(forecast_frame, text = forecast_time_format, font = ("Segoe UI", 13))
+
             if config["units"] == "metric":
                 forecast_temperature_label = CTkLabel(forecast_frame, text = f"{forecast_temperature}°", font = ("Segoe UI", 15))
             else:
                 forecast_temperature_label = CTkLabel(forecast_frame, text = f"{forecast_temperature_fahrenheit}°F", font = ("Segoe UI", 13))
             forecast_temperature_label.grid(row = 0, column = i)
-            forecast_time_label = CTkLabel(forecast_frame, text = forecast_time, font = ("Segoe UI", 13))
             forecast_time_label.grid(row = 1, column = i)
     except:
         forecast_temperature_label = CTkLabel(forecast_frame, text = "No data.", font = ("Segoe UI", 20))
         forecast_temperature_label.grid(row = 0, column = 0)
-
 
 def open_settings_window():
     settings = CTkToplevel()
@@ -358,10 +385,14 @@ def open_settings_window():
     settings_units_switch.place(x = 10, y = 10)
     units_switch_check(settings_units_switch)
 
+    time_format_switch = CTkSwitch(settings, text = "am/pm", command = lambda: time_format_handler(time_format_switch))
+    time_format_switch.place(x = 10, y = 40)
+    time_format_switch_check(time_format_switch)
+
     delete_favourites_label = CTkLabel(settings,text = "Favourite data")
-    delete_favourites_label.place(x = 10, y = 40)
+    delete_favourites_label.place(x = 10, y = 70)
     delete_favourites_button = CTkButton(settings, image = images["trash.png"], text = "", fg_color = "white", hover_color = "gray", width = 30, height = 30, command = lambda: favourite_cleaner())
-    delete_favourites_button.place(x = 110, y = 40)
+    delete_favourites_button.place(x = 110, y = 70)
 
 # --- favourite button ---
 favourite_button = CTkButton(app, text = "", image = images["star.png"], width = 30, height = 30, fg_color = "white", command = lambda: toggle_favourite(place_name_label.cget("text")), hover_color = "gray")
