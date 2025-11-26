@@ -213,14 +213,14 @@ def time_format_handler(time_switch):
     search_handler()
     update_favourite_list()
 
-def favourite_cleaner():
+def favourite_cleaner(reset_label):
     try:
         os.remove(favourites_path)
         favourite_json_create()
-        refresh()
+        reset_label.configure(text = "Restart is required")
     except Exception as e:
         print(e)
-
+    
 def search_handler():
     search_bar_entry = search_bar.get().strip()
     if search_bar_entry == "":
@@ -391,8 +391,11 @@ def open_settings_window():
 
     delete_favourites_label = CTkLabel(settings,text = "Favourite data")
     delete_favourites_label.place(x = 10, y = 70)
-    delete_favourites_button = CTkButton(settings, image = images["trash.png"], text = "", fg_color = "white", hover_color = "gray", width = 30, height = 30, command = lambda: favourite_cleaner())
+    delete_favourites_button = CTkButton(settings, image = images["trash.png"], text = "", fg_color = "white", hover_color = "gray", width = 30, height = 30, command = lambda: favourite_cleaner(reset_label))
     delete_favourites_button.place(x = 110, y = 70)
+
+    reset_label = CTkLabel(settings, text = "", text_color = "red")
+    reset_label.place(x = 10, y = 100)
 
 # --- favourite button ---
 favourite_button = CTkButton(app, text = "", image = images["star.png"], width = 30, height = 30, fg_color = "white", command = lambda: toggle_favourite(place_name_label.cget("text")), hover_color = "gray")
