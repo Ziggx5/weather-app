@@ -15,6 +15,7 @@ if getattr(sys, 'frozen', False):
 else:
     base_path = os.path.dirname(os.path.abspath(__file__))
 
+cache_path = os.path.join(base_path, "cache.json")
 config_path = os.path.join(base_path, "config.json")
 favourites_path = os.path.join(base_path, "favourites.json")
 app_icon_path = os.path.join(base_path, "images", "weather_icon.ico")
@@ -28,6 +29,24 @@ default_config = {
     "time_format" : "24"
 }
 
+def cache_create():
+    if not os.path.exists(cache_path):
+        with open (cache_path, "w") as f:
+            json.dump({}, f)
+
+cache_create()
+
+def load_cache():
+    try:
+        with open (cache_path, "r") as f:
+            return json.load(f)
+    except:
+        return {}
+
+def save_cache(data):
+    with open (cache_path, "w") as f:
+        json.dump(data, indent = 4)
+    
 # --- favourites json file ---
 def favourite_json_create():
     if not os.path.exists(favourites_path):
