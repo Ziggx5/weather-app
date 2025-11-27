@@ -240,6 +240,14 @@ def favourite_cleaner(reset_label):
     except Exception as e:
         print(e)
     
+def cache_cleaner(reset_label):
+    try:
+        os.remove(cache_path)
+        cache_create()
+        reset_label.configure(text = "Restart is required")
+    except Exception as e:
+        print(e)
+
 def internet_check():
     try:
         requests.get("https://openweathermap.org/", timeout = 2)
@@ -443,8 +451,13 @@ def open_settings_window():
     delete_favourites_button = CTkButton(settings, image = images["trash.png"], text = "", fg_color = "white", hover_color = "gray", width = 30, height = 30, command = lambda: favourite_cleaner(reset_label))
     delete_favourites_button.place(x = 110, y = 70)
 
+    delete_cache_label = CTkLabel(settings,text = "Cache data")
+    delete_cache_label.place(x = 10, y = 110)
+    delete_cache_button = CTkButton(settings, image = images["trash.png"], text = "", fg_color = "white", hover_color = "gray", width = 30, height = 30, command = lambda: cache_cleaner(reset_label))
+    delete_cache_button.place(x = 110, y = 110)
+
     reset_label = CTkLabel(settings, text = "", text_color = "red")
-    reset_label.place(x = 10, y = 100)
+    reset_label.place(x = 10, y = 140)
 
 # --- favourite button ---
 favourite_button = CTkButton(app, text = "", image = images["star.png"], width = 30, height = 30, fg_color = "white", command = lambda: toggle_favourite(place_name_label.cget("text")), hover_color = "gray")
