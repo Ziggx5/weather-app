@@ -1,5 +1,5 @@
 {
     "units": "metric",
-    "default_city": "dunaj",
+    "default_city": "paris",
     "time_format": "24"
 }
