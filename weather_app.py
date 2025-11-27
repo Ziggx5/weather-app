@@ -45,7 +45,7 @@ def load_cache():
 
 def save_cache(data):
     with open (cache_path, "w") as f:
-        json.dump(data, indent = 4)
+        json.dump(data, f, indent = 4)
     
 # --- favourites json file ---
 def favourite_json_create():
@@ -240,11 +240,29 @@ def favourite_cleaner(reset_label):
     except Exception as e:
         print(e)
     
+def internet_check():
+    try:
+        requests.get("https://openweathermap.org/", timeout = 2)
+        return True
+    except:
+        return False
+
 def search_handler():
     search_bar_entry = search_bar.get().strip()
     if search_bar_entry == "":
         status_label.configure(text = "Empty input")
         return
+    
+    cache = load_cache()
+
+    if not internet_check():
+        if search_bar_entry in cache:
+            status_label.configure(text = "No internet connection, loading from cache.")
+            data = cache[search_bar_entry]
+            return
+        else:
+            status_label.configure(text = "No internet connection, no cached data.")
+            return
 
     cords_url = f"http://api.openweathermap.org/geo/1.0/direct?q={search_bar_entry}&limit=1&appid={api_key}"
     response1 = requests.get(cords_url)
@@ -264,6 +282,13 @@ def search_handler():
             if response2.status_code == 200:
                 status_label.configure(text = "")
                 data2 = response2.json()
+
+                cache[search_bar_entry] = {
+                    "coords": data1,
+                    "weather": data2
+                }
+                save_cache(cache)
+                
                 temperature = int(data2["main"]["temp"])
                 feels_like = int(data2["main"]["feels_like"])
                 description = data2["weather"][0]["description"]
