@@ -1,0 +1,372 @@
+{
+    "paris": {
+        "coords": [
+            {
+                "name": "Paris",
+                "local_names": {
+                    "gv": "Paarys",
+                    "cv": "\u041f\u0430\u0440\u0438\u0441",
+                    "th": "\u0e1b\u0e32\u0e23\u0e35\u0e2a",
+                    "fi": "Pariisi",
+                    "bn": "\u09aa\u09cd\u09af\u09be\u09b0\u09bf\u09b8",
+                    "ar": "\u0628\u0627\u0631\u064a\u0633",
+                    "es": "Par\u00eds",
+                    "ga": "P\u00e1ras",
+                    "zh": "\u5df4\u9ece",
+                    "yo": "Parisi",
+                    "sh": "Pariz",
+                    "yi": "\u05e4\u05d0\u05e8\u05d9\u05d6",
+                    "hy": "\u0553\u0561\u0580\u056b\u0566",
+                    "tg": "\u041f\u0430\u0440\u0438\u0436",
+                    "ta": "\u0baa\u0bbe\u0bb0\u0bbf\u0bb8\u0bcd",
+                    "ku": "Par\u00ees",
+                    "ug": "\u067e\u0627\u0631\u0649\u0698",
+                    "ko": "\ud30c\ub9ac",
+                    "la": "Lutetia",
+                    "ka": "\u10de\u10d0\u10e0\u10d8\u10d6\u10d8",
+                    "an": "Par\u00eds",
+                    "ru": "\u041f\u0430\u0440\u0438\u0436",
+                    "li": "Paries",
+                    "bg": "\u041f\u0430\u0440\u0438\u0436",
+                    "sk": "Par\u00ed\u017e",
+                    "ba": "\u041f\u0430\u0440\u0438\u0436",
+                    "el": "\u03a0\u03b1\u03c1\u03af\u03c3\u03b9",
+                    "tl": "Paris",
+                    "fy": "Parys",
+                    "so": "Baariis",
+                    "be": "\u041f\u0430\u0440\u044b\u0436",
+                    "vi": "Paris",
+                    "br": "Pariz",
+                    "ja": "\u30d1\u30ea",
+                    "sv": "Paris",
+                    "sl": "Pariz",
+                    "kk": "\u041f\u0430\u0440\u0438\u0436",
+                    "kv": "\u041f\u0430\u0440\u0438\u0436",
+                    "uk": "\u041f\u0430\u0440\u0438\u0436",
+                    "pl": "Pary\u017c",
+                    "cs": "Pa\u0159\u00ed\u017e",
+                    "de": "Paris",
+                    "hu": "P\u00e1rizs",
+                    "it": "Parigi",
+                    "lt": "Pary\u017eius",
+                    "ml": "\u0d2a\u0d3e\u0d30\u0d3f\u0d38\u0d4d",
+                    "bs": "Pariz",
+                    "za": "Bahliz",
+                    "hr": "Pariz",
+                    "pa": "\u0a2a\u0a48\u0a30\u0a3f\u0a38",
+                    "bo": "\u0f55\u0f0b\u0f62\u0f72\u0f0d",
+                    "oc": "Par\u00eds",
+                    "no": "Paris",
+                    "ln": "Pari",
+                    "ca": "Par\u00eds",
+                    "cu": "\u041f\u0430\u0440\u0438\u0436\u044c",
+                    "uz": "Parij",
+                    "mr": "\u092a\u0945\u0930\u093f\u0938",
+                    "lv": "Par\u012bze",
+                    "tk": "Pari\u017e",
+                    "ht": "Pari",
+                    "lb": "Par\u00e4is",
+                    "fa": "\u067e\u0627\u0631\u06cc\u0633",
+                    "co": "Parighji",
+                    "hi": "\u092a\u0948\u0930\u093f\u0938",
+                    "mn": "\u041f\u0430\u0440\u0438\u0441",
+                    "km": "\u1794\u17c9\u17b6\u179a\u17b8\u179f",
+                    "am": "\u1353\u122a\u1235",
+                    "af": "Parys",
+                    "ky": "\u041f\u0430\u0440\u0438\u0436",
+                    "wa": "Paris",
+                    "ur": "\u067e\u06cc\u0631\u0633",
+                    "kn": "\u0caa\u0ccd\u0caf\u0cbe\u0cb0\u0cbf\u0cb8\u0ccd",
+                    "et": "Pariis",
+                    "os": "\u041f\u0430\u0440\u0438\u0436",
+                    "eu": "Paris",
+                    "sq": "Parisi",
+                    "sr": "\u041f\u0430\u0440\u0438\u0437",
+                    "mi": "Par\u012b",
+                    "zu": "IParisi",
+                    "my": "\u1015\u102b\u101b\u102e\u1019\u103c\u102d\u102f\u1037",
+                    "tt": "\u041f\u0430\u0440\u0438\u0436",
+                    "he": "\u05e4\u05e8\u05d9\u05d6",
+                    "gu": "\u0aaa\u0ac5\u0ab0\u0abf\u0ab8",
+                    "wo": "Pari",
+                    "sc": "Parigi",
+                    "gn": "Par\u0129",
+                    "ps": "\u067e\u0627\u0631\u064a\u0633",
+                    "te": "\u0c2a\u0c3e\u0c30\u0c3f\u0c38\u0c4d",
+                    "gl": "Par\u00eds",
+                    "nl": "Parijs",
+                    "or": "\u0b2a\u0b4d\u0b5f\u0b3e\u0b30\u0b3f\u0b38",
+                    "eo": "Parizo",
+                    "ha": "Pariis",
+                    "mk": "\u041f\u0430\u0440\u0438\u0437",
+                    "fr": "Paris",
+                    "ne": "\u092a\u0947\u0930\u093f\u0938",
+                    "is": "Par\u00eds"
+                },
+                "lat": 48.8588897,
+                "lon": 2.3200410217200766,
+                "country": "FR",
+                "state": "Ile-de-France"
+            }
+        ],
+        "weather": {
+            "coord": {
+                "lon": 2.32,
+                "lat": 48.8589
+            },
+            "weather": [
+                {
+                    "id": 804,
+                    "main": "Clouds",
+                    "description": "overcast clouds",
+                    "icon": "04n"
+                }
+            ],
+            "base": "stations",
+            "main": {
+                "temp": 7.48,
+                "feels_like": 4.38,
+                "temp_min": 6.77,
+                "temp_max": 8.08,
+                "pressure": 1021,
+                "humidity": 91,
+                "sea_level": 1021,
+                "grnd_level": 1011
+            },
+            "visibility": 10000,
+            "wind": {
+                "speed": 5.14,
+                "deg": 210
+            },
+            "clouds": {
+                "all": 100
+            },
+            "dt": 1764275815,
+            "sys": {
+                "type": 2,
+                "id": 2012208,
+                "country": "FR",
+                "sunrise": 1764227864,
+                "sunset": 1764259164
+            },
+            "timezone": 3600,
+            "id": 6545270,
+            "name": "Palais-Royal",
+            "cod": 200
+        }
+    },
+    "dunaj": {
+        "coords": [
+            {
+                "name": "Vienna",
+                "local_names": {
+                    "so": "Fiyena",
+                    "ug": "Wy\u00e9na",
+                    "oc": "Viena",
+                    "ms": "Vienna",
+                    "lt": "Viena",
+                    "eu": "Viena",
+                    "kn": "\u0cb5\u0cbf\u0caf\u0cc6\u0ca8\u0ccd\u0ca8",
+                    "ku": "Viyana",
+                    "bo": "\u0f5d\u0f72\u0f0b\u0f68\u0f7a\u0f0b\u0f53\u0f0d",
+                    "co": "Vienna",
+                    "hu": "B\u00e9cs",
+                    "tt": "\u0412\u0435\u043d\u0430 \u0448\u04d9\u04bb\u04d9\u0440\u0435",
+                    "mi": "Whiena",
+                    "hi": "\u0935\u093f\u092f\u0928\u093e",
+                    "az": "Vyana",
+                    "ka": "\u10d5\u10d4\u10dc\u10d0",
+                    "ky": "\u0412\u0435\u043d\u0430",
+                    "yo": "Vienna",
+                    "tr": "Viyana",
+                    "am": "\u126a\u12e8\u1293",
+                    "nl": "Wenen",
+                    "tl": "Vienna",
+                    "bn": "\u09ad\u09bf\u09af\u09bc\u09c7\u09a8\u09be",
+                    "tk": "Wena",
+                    "tg": "\u0412\u0435\u043d\u0430",
+                    "ba": "Be\u010d",
+                    "ie": "Vienna",
+                    "be": "\u0412\u0435\u043d\u0430",
+                    "uz": "Vena",
+                    "my": "\u1017\u102e\u101a\u1004\u103a\u1014\u102c\u1019\u103c\u102d\u102f\u1037",
+                    "zh": "\u7ef4\u4e5f\u7eb3",
+                    "sc": "Vienna",
+                    "fi": "Wien",
+                    "gv": "Veen",
+                    "mr": "\u0935\u094d\u0939\u093f\u092f\u0947\u0928\u093e",
+                    "fa": "\u0648\u06cc\u0646",
+                    "ce": "\u0412\u0435\u043d\u0430",
+                    "no": "Wien",
+                    "lv": "V\u012bne",
+                    "bg": "\u0412\u0438\u0435\u043d\u0430",
+                    "ee": "Vienna",
+                    "li": "Wene",
+                    "he": "\u05d5\u05d9\u05e0\u05d4",
+                    "mk": "\u0412\u0438\u0435\u043d\u0430",
+                    "pt": "Viena",
+                    "sk": "Viede\u0148",
+                    "th": "\u0e40\u0e27\u0e35\u0e22\u0e19\u0e19\u0e32",
+                    "ar": "\u0641\u064a\u064a\u0646\u0627",
+                    "ml": "\u0d35\u0d3f\u0d2f\u0d28\u0d4d\u0d28",
+                    "hy": "\u054e\u056b\u0565\u0576\u0576\u0561",
+                    "wo": "Wiyen",
+                    "et": "Viin",
+                    "cv": "\u0412\u0435\u043d\u0430",
+                    "sr": "\u0411\u0435\u0447",
+                    "eo": "Vieno",
+                    "el": "\u0392\u03b9\u03ad\u03bd\u03bd\u03b7",
+                    "es": "Viena",
+                    "an": "Viena",
+                    "rm": "Vienna",
+                    "pl": "Wiede\u0144",
+                    "ca": "Viena",
+                    "gl": "Viena",
+                    "it": "Vienna",
+                    "fy": "Wenen",
+                    "gd": "Vienna",
+                    "kv": "\u0412\u0435\u043d\u0430",
+                    "ps": "\u0648\u064a\u0646",
+                    "ln": "Vi\u025bn\u025b",
+                    "ur": "\u0648\u06cc\u0627\u0646\u0627",
+                    "st": "Vienna",
+                    "en": "Vienna",
+                    "ta": "\u0bb5\u0bbf\u0baf\u0ba9\u0bcd\u0ba9\u0bbe",
+                    "jv": "Wina",
+                    "sh": "Be\u010d",
+                    "sw": "Vienna",
+                    "sq": "Vjena",
+                    "cs": "V\u00edde\u0148",
+                    "de": "Wien",
+                    "kk": "\u0412\u0435\u043d\u0430",
+                    "os": "\u0412\u0435\u043d\u00e6",
+                    "fr": "Vienne",
+                    "is": "V\u00edn",
+                    "ia": "Vienna",
+                    "ru": "\u0412\u0435\u043d\u0430",
+                    "mn": "\u0412\u0435\u043d\u0430",
+                    "af": "Wene",
+                    "hr": "Be\u010d",
+                    "ga": "V\u00edn",
+                    "ja": "\u30a6\u30a3\u30fc\u30f3",
+                    "br": "Vienna",
+                    "yi": "\u05d5\u05d5\u05d9\u05e2\u05df",
+                    "ro": "Viena",
+                    "uk": "\u0412\u0456\u0434\u0435\u043d\u044c",
+                    "bs": "Be\u010d",
+                    "ko": "\ube48",
+                    "sv": "Wien",
+                    "sl": "Dunaj",
+                    "id": "Wina",
+                    "bi": "Vienna",
+                    "ht": "Vy\u00e8n",
+                    "la": "Vindobona",
+                    "vi": "Vi\u00ean"
+                },
+                "lat": 48.2083537,
+                "lon": 16.3725042,
+                "country": "AT"
+            }
+        ],
+        "weather": {
+            "coord": {
+                "lon": 16.3738,
+                "lat": 48.2082
+            },
+            "weather": [
+                {
+                    "id": 800,
+                    "main": "Clear",
+                    "description": "clear sky",
+                    "icon": "01n"
+                }
+            ],
+            "base": "stations",
+            "main": {
+                "temp": 0.22,
+                "feels_like": -3.31,
+                "temp_min": -1.23,
+                "temp_max": 1.08,
+                "pressure": 1026,
+                "humidity": 82,
+                "sea_level": 1026,
+                "grnd_level": 997
+            },
+            "visibility": 10000,
+            "wind": {
+                "speed": 3.09,
+                "deg": 310
+            },
+            "clouds": {
+                "all": 0
+            },
+            "dt": 1764275907,
+            "sys": {
+                "type": 2,
+                "id": 2037452,
+                "country": "AT",
+                "sunrise": 1764224341,
+                "sunset": 1764255940
+            },
+            "timezone": 3600,
+            "id": 2761369,
+            "name": "Vienna",
+            "cod": 200
+        }
+    },
+    "los santos": {
+        "coords": [
+            {
+                "name": "Los Santos",
+                "lat": 40.5449825,
+                "lon": -5.7972566,
+                "country": "ES",
+                "state": "Castile and Le\u00f3n"
+            }
+        ],
+        "weather": {
+            "coord": {
+                "lon": -5.7973,
+                "lat": 40.545
+            },
+            "weather": [
+                {
+                    "id": 802,
+                    "main": "Clouds",
+                    "description": "scattered clouds",
+                    "icon": "03n"
+                }
+            ],
+            "base": "stations",
+            "main": {
+                "temp": 3.47,
+                "feels_like": 1.98,
+                "temp_min": 3.47,
+                "temp_max": 3.47,
+                "pressure": 1026,
+                "humidity": 85,
+                "sea_level": 1026,
+                "grnd_level": 918
+            },
+            "visibility": 10000,
+            "wind": {
+                "speed": 1.67,
+                "deg": 53,
+                "gust": 1.52
+            },
+            "clouds": {
+                "all": 36
+            },
+            "dt": 1764275872,
+            "sys": {
+                "country": "ES",
+                "sunrise": 1764228206,
+                "sunset": 1764262719
+            },
+            "timezone": 3600,
+            "id": 3126063,
+            "name": "Casas de Monle\u00f3n",
+            "cod": 200
+        }
+    }
+}
