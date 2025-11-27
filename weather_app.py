@@ -247,7 +247,102 @@ def internet_check():
     except:
         return False
 
+def populate_ui(data):
+    data1 = data["coords"]
+    data2 = data["weather"]
+    temperature = int(data2["main"]["temp"])
+    feels_like = int(data2["main"]["feels_like"])
+    description = data2["weather"][0]["description"]
+    wind_speed = data2["wind"]["speed"]
+    humidity = data2["main"]["humidity"]
+    sunrise_unix_timestamp = data2["sys"]["sunrise"]
+    sunset_unix_timestamp = data2["sys"]["sunset"]
+    timezone_offset = data2["timezone"]
+    wind_degrees = data2["wind"]["deg"]
+    sunrise = (datetime.fromtimestamp(sunrise_unix_timestamp, tz = timezone.utc) + timedelta(seconds = timezone_offset))
+    sunset = (datetime.fromtimestamp(sunset_unix_timestamp, tz = timezone.utc) + timedelta(seconds = timezone_offset))
+    if config["time_format"] == "24":
+        sunrise = sunrise.strftime("%H:%M")
+        sunset = sunset.strftime("%H:%M")
+    else:
+        sunrise = sunrise.strftime("%H %p")
+        sunset = sunset.strftime("%H %p")
+
+    if config["units"] == "metric":      
+        if temperature <= -10:
+            temp_color = "#2196F3"
+        elif -10 < temperature <= 0:
+            temp_color = "#4FC3F7"
+        elif 0 < temperature <= 10:
+            temp_color = "#81D4FA"
+        elif 10 < temperature <= 20:
+            temp_color = "#FFF176"
+        elif 20 < temperature <= 30:
+            temp_color = "#FFB74D"
+        else:
+            temp_color = "#FF7043"
+
+        temperature_label.configure(text = str(temperature) + "°", text_color = temp_color)
+        description_label.configure(text = description + " | Feels like: " + str(feels_like) + "°")
+        wind_speed_label.configure(text = str(wind_speed) + "km/h")
+    else:
+        temperature_fahrenheit = int((temperature * 1.8) + 32)
+        feels_like_fahrenheit = int((feels_like * 1.8) + 32)
+        wind_speed_mph = int(wind_speed * 0.6213711922)
+        if temperature_fahrenheit <= 14:
+            temp_color = "#2196F3"
+        elif 14 < temperature_fahrenheit <= 32:
+            temp_color = "#4FC3F7"
+        elif 32 < temperature_fahrenheit <= 50:
+            temp_color = "#81D4FA"
+        elif 50 < temperature_fahrenheit <= 68:
+            temp_color = "#FFF176"
+        elif 68 < temperature_fahrenheit <= 86:
+            temp_color = "#FFB74D"
+        else:
+            temp_color = "#FF7043"
+
+        temperature_label.configure(text = str(temperature_fahrenheit) + "°F", text_color = temp_color)
+        description_label.configure(text = description + " | Feels like: " + str(feels_like_fahrenheit) + "°F")
+        wind_speed_label.configure(text = str(wind_speed_mph) + "mph")
+
+    if search_bar.get() == config["default_city"]:
+        default_place_button.configure(image = images["padlock1.png"], state = "disabled", fg_color = "gray", hover_color = "gray")
+    else:
+        default_place_button.configure(image = images["padlock2.png"], state = "enabled", fg_color = "white")
+
+    # --- looking for rain ---
+    if "rain" in data2:
+        precipitation = data2["rain"]["1h"]
+    else:
+        precipitation = 0
+
+    # --- Looking for english name ---
+    if "local_names" in data1[0]:
+        if "en" in data1[0]["local_names"]:
+            place_name = data1[0]["local_names"]["en"]
+        else:
+            place_name = data1[0]["name"]
+    else:
+        place_name = data1[0]["name"]
+                
+    if place_name in favourites:
+        favourite_button.configure(image = images["star2.png"])
+    else:
+        favourite_button.configure(image = images["star.png"])
+
+    place_name_label.configure(text = place_name)
+    humidity_percentage.configure(text = str(humidity) + "%")
+    precipitation_measure.configure(text = str(precipitation) + " mm")
+    sunrise_time.configure(text = str(sunrise))
+    sunset_time.configure(text = str(sunset))
+    wind_degrees_label.configure(text = str(wind_degrees) + "°")
+    rotate_arrow = arrow_image.rotate(-wind_degrees + 180)
+    rotated_arrow = CTkImage(light_image = rotate_arrow, dark_image = rotate_arrow, size = (80, 80))
+    wind_arrow.configure(image = rotated_arrow)
+
 def search_handler():
+    warning_label.configure(text = "")
     search_bar_entry = search_bar.get().strip()
     if search_bar_entry == "":
         status_label.configure(text = "Empty input")
@@ -256,9 +351,11 @@ def search_handler():
     cache = load_cache()
 
     if not internet_check():
+        warning_label.configure(text = "No internet connection")
         if search_bar_entry in cache:
             status_label.configure(text = "No internet connection, loading from cache.")
             data = cache[search_bar_entry]
+            populate_ui(data)
             return
         else:
             status_label.configure(text = "No internet connection, no cached data.")
@@ -288,100 +385,8 @@ def search_handler():
                     "weather": data2
                 }
                 save_cache(cache)
-                
-                temperature = int(data2["main"]["temp"])
-                feels_like = int(data2["main"]["feels_like"])
-                description = data2["weather"][0]["description"]
-                wind_speed = data2["wind"]["speed"]
-                humidity = data2["main"]["humidity"]
-                sunrise_unix_timestamp = data2["sys"]["sunrise"]
-                sunset_unix_timestamp = data2["sys"]["sunset"]
-                timezone_offset = data2["timezone"]
-                wind_degrees = data2["wind"]["deg"]
-                sunrise = (datetime.fromtimestamp(sunrise_unix_timestamp, tz = timezone.utc) + timedelta(seconds = timezone_offset))
-                sunset = (datetime.fromtimestamp(sunset_unix_timestamp, tz = timezone.utc) + timedelta(seconds = timezone_offset))
-                if config["time_format"] == "24":
-                    sunrise = sunrise.strftime("%H:%M")
-                    sunset = sunset.strftime("%H:%M")
-                else:
-                    sunrise = sunrise.strftime("%H %p")
-                    sunset = sunset.strftime("%H %p")
-
-                if config["units"] == "metric":
-
-                    
-                    if temperature <= -10:
-                        temp_color = "#2196F3"
-                    elif -10 < temperature <= 0:
-                        temp_color = "#4FC3F7"
-                    elif 0 < temperature <= 10:
-                        temp_color = "#81D4FA"
-                    elif 10 < temperature <= 20:
-                        temp_color = "#FFF176"
-                    elif 20 < temperature <= 30:
-                        temp_color = "#FFB74D"
-                    else:
-                        temp_color = "#FF7043"
-
-                    temperature_label.configure(text = str(temperature) + "°", text_color = temp_color)
-                    description_label.configure(text = description + " | Feels like: " + str(feels_like) + "°")
-                    wind_speed_label.configure(text = str(wind_speed) + "km/h")
-                else:
-                    temperature_fahrenheit = int((temperature * 1.8) + 32)
-                    feels_like_fahrenheit = int((feels_like * 1.8) + 32)
-                    wind_speed_mph = int(wind_speed * 0.6213711922)
-                    if temperature_fahrenheit <= 14:
-                        temp_color = "#2196F3"
-                    elif 14 < temperature_fahrenheit <= 32:
-                        temp_color = "#4FC3F7"
-                    elif 32 < temperature_fahrenheit <= 50:
-                        temp_color = "#81D4FA"
-                    elif 50 < temperature_fahrenheit <= 68:
-                        temp_color = "#FFF176"
-                    elif 68 < temperature_fahrenheit <= 86:
-                        temp_color = "#FFB74D"
-                    else:
-                        temp_color = "#FF7043"
-
-                    temperature_label.configure(text = str(temperature_fahrenheit) + "°F", text_color = temp_color)
-                    description_label.configure(text = description + " | Feels like: " + str(feels_like_fahrenheit) + "°F")
-                    wind_speed_label.configure(text = str(wind_speed_mph) + "mph")
-
-                if search_bar.get() == config["default_city"]:
-                    default_place_button.configure(image = images["padlock1.png"], state = "disabled", fg_color = "gray", hover_color = "gray")
-                else:
-                    default_place_button.configure(image = images["padlock2.png"], state = "enabled", fg_color = "white")
-
-                # --- looking for rain ---
-                if "rain" in data2:
-                    precipitation = data2["rain"]["1h"]
-                else:
-                    precipitation = 0
-
-                # --- Looking for english name ---
-                if "local_names" in data1[0]:
-                    if "en" in data1[0]["local_names"]:
-                        place_name = data1[0]["local_names"]["en"]
-                    else:
-                        place_name = data1[0]["name"]
-                else:
-                    place_name = data1[0]["name"]
-                
-                if place_name in favourites:
-                    favourite_button.configure(image = images["star2.png"])
-                else:
-                    favourite_button.configure(image = images["star.png"])
-
-                place_name_label.configure(text = place_name)
-                humidity_percentage.configure(text = str(humidity) + "%")
-                precipitation_measure.configure(text = str(precipitation) + " mm")
-                sunrise_time.configure(text = str(sunrise))
-                sunset_time.configure(text = str(sunset))
-                wind_degrees_label.configure(text = str(wind_degrees) + "°")
-                rotate_arrow = arrow_image.rotate(-wind_degrees + 180)
-                rotated_arrow = CTkImage(light_image = rotate_arrow, dark_image = rotate_arrow, size = (80, 80))
-                wind_arrow.configure(image = rotated_arrow)
-                
+                populate_ui(cache[search_bar_entry])
+                forecast_handler(search_bar_entry)
             else:
                 status_label.configure(text = "Error getting weather info" + response2.status_code + response2.text)
         else:
@@ -546,6 +551,10 @@ default_place_button.place(x = 677.5, y = 40)
 # --- settings button ---
 settings_button = CTkButton(app, text = "", image = images["settings.png"], width = 30, height = 30, fg_color = "white", hover_color = "gray", command = lambda: open_settings_window())
 settings_button.place(x = 230, y = 10)
+
+# --- No internet warning ---
+warning_label = CTkLabel(app, text = "", text_color = "red")
+warning_label.place(x = 660, y = 705)
 
 search_bar.insert(0, config["default_city"])
 search_handler()
