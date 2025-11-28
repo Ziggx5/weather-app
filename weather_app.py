@@ -256,6 +256,7 @@ def internet_check():
         return False
 
 def populate_ui(data):
+    place_name = data["place_name"]
     data1 = data["coords"]
     data2 = data["weather"]
     temperature = int(data2["main"]["temp"])
@@ -325,15 +326,6 @@ def populate_ui(data):
     else:
         precipitation = 0
 
-    # --- Looking for english name ---
-    if "local_names" in data1[0]:
-        if "en" in data1[0]["local_names"]:
-            place_name = data1[0]["local_names"]["en"]
-        else:
-            place_name = data1[0]["name"]
-    else:
-        place_name = data1[0]["name"]
-                
     if place_name in favourites:
         favourite_button.configure(image = images["star2.png"])
     else:
@@ -380,6 +372,15 @@ def search_handler():
             lat = data1[0]["lat"]
             lon = data1[0]["lon"]
             
+            # --- Looking for english name ---
+            if "local_names" in data1[0]:
+                if "en" in data1[0]["local_names"]:
+                    place_name = data1[0]["local_names"]["en"]
+                else:
+                    place_name = data1[0]["name"]
+            else:
+                place_name = data1[0]["name"]
+                
             # --- Get weather and forecast info ---
             weather_data_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid={api_key}"
             response2 = requests.get(weather_data_url)
@@ -388,12 +389,13 @@ def search_handler():
                 status_label.configure(text = "")
                 data2 = response2.json()
 
-                cache[search_bar_entry] = {
+                cache[place_name] = {
                     "coords": data1,
-                    "weather": data2
+                    "weather": data2,
+                    "place_name": place_name
                 }
                 save_cache(cache)
-                populate_ui(cache[search_bar_entry])
+                populate_ui(cache[place_name])
                 forecast_handler(search_bar_entry)
             else:
                 status_label.configure(text = "Error getting weather info" + response2.status_code + response2.text)
