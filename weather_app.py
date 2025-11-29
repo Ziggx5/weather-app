@@ -376,15 +376,20 @@ def search_handler():
             if "local_names" in data1[0]:
                 if "en" in data1[0]["local_names"]:
                     place_name = data1[0]["local_names"]["en"]
+                    search_bar.delete(0, "end")
+                    search_bar_entry = search_bar.insert(0, place_name)
                 else:
                     place_name = data1[0]["name"]
+                    search_bar.delete(0, "end")
+                    search_bar_entry = search_bar.insert(0, place_name)
             else:
                 place_name = data1[0]["name"]
+                search_bar.delete(0, "end")
+                search_bar_entry = search_bar.insert(0, place_name)
                 
             # --- Get weather and forecast info ---
             weather_data_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid={api_key}"
             response2 = requests.get(weather_data_url)
-            forecast_handler(search_bar_entry)
             if response2.status_code == 200:
                 status_label.configure(text = "")
                 data2 = response2.json()
