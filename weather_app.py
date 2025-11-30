@@ -360,7 +360,7 @@ def search_handler():
         else:
             status_label.configure(text = "No internet connection, no cached data.")
             return
-
+            
     cords_url = f"http://api.openweathermap.org/geo/1.0/direct?q={search_bar_entry}&limit=1&appid={api_key}"
     response1 = requests.get(cords_url)
 
@@ -371,29 +371,24 @@ def search_handler():
             status_label.configure(text = "")
             lat = data1[0]["lat"]
             lon = data1[0]["lon"]
-            
+
             # --- Looking for english name ---
-            if "local_names" in data1[0]:
-                if "en" in data1[0]["local_names"]:
-                    place_name = data1[0]["local_names"]["en"]
-                    search_bar.delete(0, "end")
-                    search_bar_entry = search_bar.insert(0, place_name)
-                else:
-                    place_name = data1[0]["name"]
-                    search_bar.delete(0, "end")
-                    search_bar_entry = search_bar.insert(0, place_name)
+            if "local_names" in data1[0] and "en" in data1[0]["local_names"]:
+                place_name = data1[0]["local_names"]["en"]
             else:
                 place_name = data1[0]["name"]
-                search_bar.delete(0, "end")
-                search_bar_entry = search_bar.insert(0, place_name)
-                
+                place_name = place_name.split("/")[0]
+
+            search_bar.delete(0, "end")
+            search_bar.insert(0, place_name)
+            search_bar_entry = place_name
+
             # --- Get weather and forecast info ---
             weather_data_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid={api_key}"
             response2 = requests.get(weather_data_url)
             if response2.status_code == 200:
                 status_label.configure(text = "")
                 data2 = response2.json()
-
                 cache[place_name] = {
                     "coords": data1,
                     "weather": data2,
