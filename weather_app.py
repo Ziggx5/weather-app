@@ -20,6 +20,7 @@ config_path = os.path.join(base_path, "config.json")
 favourites_path = os.path.join(base_path, "favourites.json")
 app_icon_path = os.path.join(base_path, "images", "weather_icon.ico")
 arrow_image_path = os.path.join(base_path, "images", "arrow.png")
+env_path = os.path.join(base_path, ".env")
 load_dotenv()
 api_key = os.getenv("OPENWEATHER_API_KEY")
 
@@ -104,7 +105,7 @@ images = {}
 for file_name in os.listdir(images_path):
     filepath = os.path.join(images_path, file_name)
     open_image = Image.open(filepath)
-    big_icons = ("search_icon.png", "star.png", "star2.png", "refresh.png", "padlock1.png", "padlock2.png", "settings.png", "trash.png")
+    big_icons = ("search_icon.png", "star.png", "star2.png", "refresh.png", "padlock1.png", "padlock2.png", "settings.png", "trash.png", "write.png")
     if file_name in big_icons:
         images[file_name] = CTkImage(light_image = open_image, dark_image = open_image, size = (20, 20))
     elif "precipitation.png" in file_name:
@@ -434,32 +435,54 @@ def forecast_handler(entry):
         forecast_temperature_label = CTkLabel(forecast_frame, text = "No data.", font = ("Segoe UI", 20))
         forecast_temperature_label.grid(row = 0, column = 0)
 
+#def edit_api_key():
+
 def open_settings_window():
     settings = CTkToplevel()
     settings.title("Settings")
-    settings.geometry("250x200")
+    settings.geometry("250x300")
     settings.resizable(False, False)
-    
+    with open (env_path) as f:
+        api_key_output = f.read().split("=")[1]
+
+    metric_label = CTkLabel(settings, text = "Units:", font = ("Segoe UI", 20))
+    metric_label.place(x = 10, y = 10)
+
     settings_units_switch = CTkSwitch(settings, text = "imperial", command = lambda: change_units(settings_units_switch))
-    settings_units_switch.place(x = 10, y = 10)
+    settings_units_switch.place(x = 10, y = 40)
     units_switch_check(settings_units_switch)
 
     time_format_switch = CTkSwitch(settings, text = "am/pm", command = lambda: time_format_handler(time_format_switch))
-    time_format_switch.place(x = 10, y = 40)
+    time_format_switch.place(x = 10, y = 70)
     time_format_switch_check(time_format_switch)
 
+    files_label = CTkLabel(settings, text = "Files:", font = ("Segoe UI", 20))
+    files_label.place(x = 10, y = 100)
+
     delete_favourites_label = CTkLabel(settings,text = "Favourite data")
-    delete_favourites_label.place(x = 10, y = 70)
+    delete_favourites_label.place(x = 10, y = 130)
     delete_favourites_button = CTkButton(settings, image = images["trash.png"], text = "", fg_color = "white", hover_color = "gray", width = 30, height = 30, command = lambda: favourite_cleaner(reset_label))
-    delete_favourites_button.place(x = 110, y = 70)
+    delete_favourites_button.place(x = 110, y = 130)
 
     delete_cache_label = CTkLabel(settings,text = "Cache data")
-    delete_cache_label.place(x = 10, y = 110)
+    delete_cache_label.place(x = 10, y = 170)
     delete_cache_button = CTkButton(settings, image = images["trash.png"], text = "", fg_color = "white", hover_color = "gray", width = 30, height = 30, command = lambda: cache_cleaner(reset_label))
-    delete_cache_button.place(x = 110, y = 110)
+    delete_cache_button.place(x = 110, y = 170)
 
+    api_key_label = CTkLabel(settings, text = "API key:", font = ("Segoe UI", 20))
+    api_key_label.place(x = 10, y = 200)
+
+    api_key_entry = CTkEntry(settings, placeholder_text = "Your API...", width = 150, height = 30, corner_radius = 20, border_width = 0)
+    api_key_entry.place(x = 10, y = 240)
+
+    enter_api_key_button = CTkButton(settings, image = images["write.png"], text = "", fg_color = "white", hover_color = "gray", width = 30, height = 30, command = lambda: edit_api_key())
+    enter_api_key_button.place(x = 170, y = 240)
+
+    api_key_entry.insert(0, api_key_output)
     reset_label = CTkLabel(settings, text = "", text_color = "red")
-    reset_label.place(x = 10, y = 140)
+    reset_label.place(x = 10, y = 270)
+
+
 
 # --- favourite button ---
 favourite_button = CTkButton(app, text = "", image = images["star.png"], width = 30, height = 30, fg_color = "white", command = lambda: toggle_favourite(place_name_label.cget("text")), hover_color = "gray")
