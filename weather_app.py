@@ -30,6 +30,13 @@ default_config = {
     "time_format" : "24"
 }
 
+if not os.path.exists(env_path):
+    with open (env_path, "w") as f:
+        f.write("OPENWEATHER_API_KEY=")
+
+with open (env_path) as f:
+    api_key_output = f.read().split("=")[1]
+
 def cache_create():
     if not os.path.exists(cache_path):
         with open (cache_path, "w") as f:
@@ -402,7 +409,7 @@ def search_handler():
         else:
             status_label.configure(text = "Place not found.")
     else:
-        status_label.configure(text = "Error:" + response1.status_code + response1.text)
+        status_label.configure(text = str(f"Error: {response1.status_code} {response1.text}"))
 
 def forecast_handler(entry):
     try:
@@ -439,8 +446,6 @@ def open_settings_window():
     settings.title("Settings")
     settings.geometry("250x300")
     settings.resizable(False, False)
-    with open (env_path) as f:
-        api_key_output = f.read().split("=")[1]
 
     metric_label = CTkLabel(settings, text = "Units:", font = ("Segoe UI", 20))
     metric_label.place(x = 10, y = 10)
@@ -472,17 +477,18 @@ def open_settings_window():
     api_key_entry = CTkEntry(settings, placeholder_text = "Your API...", width = 150, height = 30, corner_radius = 20, border_width = 0)
     api_key_entry.place(x = 10, y = 240)
 
-    enter_api_key_button = CTkButton(settings, image = images["write.png"], text = "", fg_color = "white", hover_color = "gray", width = 30, height = 30, command = lambda: edit_api_key(api_key_entry))
+    enter_api_key_button = CTkButton(settings, image = images["write.png"], text = "", fg_color = "white", hover_color = "gray", width = 30, height = 30, command = lambda: edit_api_key(api_key_entry, reset_label))
     enter_api_key_button.place(x = 170, y = 240)
 
     api_key_entry.insert(0, api_key_output)
     reset_label = CTkLabel(settings, text = "", text_color = "red")
     reset_label.place(x = 10, y = 270)
 
-def edit_api_key(entry):
+def edit_api_key(entry, reset_label):
     entry = entry.get()
     with open (env_path, "w") as f:
         f.write(f"OPENWEATHER_API_KEY={entry}")
+    reset_label.configure(text = "Restart is required")
 
 # --- favourite button ---
 favourite_button = CTkButton(app, text = "", image = images["star.png"], width = 30, height = 30, fg_color = "white", command = lambda: toggle_favourite(place_name_label.cget("text")), hover_color = "gray")
