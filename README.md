@@ -2,7 +2,6 @@
 
 Modern desktop app built with **Python**, **CustomTkinter**, and **OpenWeather API**.
 A clean UI focused on minimalism, real-time data, favourite locations all in one simple desktop app.
-
 Image from latest version (2.0)
 <img width="828" height="782" alt="image" src="https://github.com/user-attachments/assets/897ea3a5-edb6-4c09-bc19-11398d93ec4e" />
 
@@ -49,6 +48,7 @@ Copyright © 2025 Maj Sedonja
 
 Maj Sedonja
 Github: https://github.com/Ziggx5
+
 Discord: ziggx
 
 If you enjoy this project, consider giving the repository a ⭐
