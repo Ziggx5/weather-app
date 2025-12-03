@@ -231,7 +231,6 @@ def time_format_handler(time_switch):
         config["time_format"] = "24"
         save_config(config)
     search_handler()
-    update_favourite_list()
 
 def favourite_cleaner(reset_label):
     try:
@@ -435,8 +434,6 @@ def forecast_handler(entry):
         forecast_temperature_label = CTkLabel(forecast_frame, text = "No data.", font = ("Segoe UI", 20))
         forecast_temperature_label.grid(row = 0, column = 0)
 
-#def edit_api_key():
-
 def open_settings_window():
     settings = CTkToplevel()
     settings.title("Settings")
@@ -475,14 +472,17 @@ def open_settings_window():
     api_key_entry = CTkEntry(settings, placeholder_text = "Your API...", width = 150, height = 30, corner_radius = 20, border_width = 0)
     api_key_entry.place(x = 10, y = 240)
 
-    enter_api_key_button = CTkButton(settings, image = images["write.png"], text = "", fg_color = "white", hover_color = "gray", width = 30, height = 30, command = lambda: edit_api_key())
+    enter_api_key_button = CTkButton(settings, image = images["write.png"], text = "", fg_color = "white", hover_color = "gray", width = 30, height = 30, command = lambda: edit_api_key(api_key_entry))
     enter_api_key_button.place(x = 170, y = 240)
 
     api_key_entry.insert(0, api_key_output)
     reset_label = CTkLabel(settings, text = "", text_color = "red")
     reset_label.place(x = 10, y = 270)
 
-
+def edit_api_key(entry):
+    entry = entry.get()
+    with open (env_path, "w") as f:
+        f.write(f"OPENWEATHER_API_KEY={entry}")
 
 # --- favourite button ---
 favourite_button = CTkButton(app, text = "", image = images["star.png"], width = 30, height = 30, fg_color = "white", command = lambda: toggle_favourite(place_name_label.cget("text")), hover_color = "gray")
