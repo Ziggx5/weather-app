@@ -28,9 +28,13 @@ Image from latest version (2.0)
 3. Extract it anywhere you like.
 4. Run the application (`Weather.exe`)
 
-🛠️ Technologies Used
+🛠️ Technologies/libraries Used
 - Python
 - CustomTkinter
+- json
+- os
+- datetime
+- sys
 - Pillow (PIL)
 - Requests
 - dotenv
@@ -45,5 +49,6 @@ Copyright © 2025 Maj Sedonja
 
 Maj Sedonja
 Github: https://github.com/Ziggx5
+Discord: ziggx
 
 If you enjoy this project, consider giving the repository a ⭐
