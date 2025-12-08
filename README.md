@@ -1,3 +1,4 @@
+Linux support **soon**!
 🌤️ Weather — Python Desktop Weather App
 
 Modern desktop app built with **Python**, **CustomTkinter**, and **OpenWeather API**.
