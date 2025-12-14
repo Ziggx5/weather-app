@@ -15,7 +15,7 @@ Image from latest version (2.0)
 - 🌡️ **Dynamic temperature** color (cold → warm gradient)
 - 🌅 **Sunrise and sunset times**
 - 🌧️ **Rain precipitation**
-- 💧 **Humidity and wind speed**
+- 💧 **Humidity**
 - 🌪️ **Wind speed and angle**
 - 🔁 **Refresh button to update all widgets**
 - 📁 **Smart path handling** (works in normal Python file and compiled `.exe`)
