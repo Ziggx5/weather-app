@@ -33,13 +33,13 @@ Image from latest version (2.0)
 🛠️ Technologies/libraries Used
 - Python
 - CustomTkinter
-- json
-- os
-- datetime
-- sys
+- Json
+- Os
+- Datetime
+- Sys
 - Pillow (PIL)
 - Requests
-- dotenv
+- Dotenv
 - OpenWeather API
 
 📄 License
