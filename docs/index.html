@@ -3,13 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Weather App</title>
+    <link rel="icon" type="image/x-icon" href="images/weather_icon.ico">
     <link rel = "stylesheet" href = "style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class = "left">
+    <div class = "header">
         <img src = "images/weather_icon.png" alt = "Weather icon image">
-        <h3>Weather App</h3>
+        <h1>🌤️ Weather App</h1>
+    </div>
+
+    <div class = "download_button_section">
+        <button class = download_button>
+            <img src = "images/download.png" alt = "Download button">
+            Download
+        </button>
+    </div>
+    
+    <div class = "description">
+        <h2>Description</h2>
+        <p>🌤️ Weather — Python Desktop Weather App. Modern desktop app built with Python, CustomTkinter, and OpenWeather API. A clean UI focused on minimalism, real-time data, favourite locations all in one simple desktop app.</p>
+        <h2>Features</h2>
+        <ul>
+            <li>🔍 Search any city</li>
+            <li>⭐ Favourite places</li>
+            <li>🌡️ Dynamic temperature color</li>
+            <li>🌅 Sunrise and sunset times</li>
+            <li>🌧️ Rain precipitation</li>
+            <li>💧 Humidity</li>
+            <li>🌪️ Wind speed and angle</li>
+            <li>🔴 Offline mode</li>
+        </ul>
+        <h2>After installation</h2>
+        <p>In app, open settings and paste your API (Can be obtained from <a href="https://openweathermap.org">here</a>)</p>
     </div>
 
 </body>
