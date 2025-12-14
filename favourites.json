@@ -1,7 +1,12 @@
 [
     "Vienna",
     "Cambridge",
+<<<<<<< HEAD
     "Rome",
     "London",
     "Budapest"
+=======
+    "London",
+    "Lisbon"
+>>>>>>> 9df807d (Added basic files for website)
 ]
