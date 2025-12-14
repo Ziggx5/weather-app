@@ -4,6 +4,7 @@
             {
                 "name": "Vienna",
                 "local_names": {
+<<<<<<< HEAD
                     "eu": "Viena",
                     "ug": "Wy\u00e9na",
                     "nl": "Wenen",
@@ -106,6 +107,110 @@
                     "co": "Vienna",
                     "ps": "\u0648\u064a\u0646",
                     "ie": "Vienna"
+=======
+                    "sl": "Dunaj",
+                    "hi": "\u0935\u093f\u092f\u0928\u093e",
+                    "kk": "\u0412\u0435\u043d\u0430",
+                    "tg": "\u0412\u0435\u043d\u0430",
+                    "gv": "Veen",
+                    "ta": "\u0bb5\u0bbf\u0baf\u0ba9\u0bcd\u0ba9\u0bbe",
+                    "uz": "Vena",
+                    "is": "V\u00edn",
+                    "it": "Vienna",
+                    "fi": "Wien",
+                    "sv": "Wien",
+                    "cv": "\u0412\u0435\u043d\u0430",
+                    "zh": "\u7ef4\u4e5f\u7eb3",
+                    "yi": "\u05d5\u05d5\u05d9\u05e2\u05df",
+                    "mr": "\u0935\u094d\u0939\u093f\u092f\u0947\u0928\u093e",
+                    "hy": "\u054e\u056b\u0565\u0576\u0576\u0561",
+                    "rm": "Vienna",
+                    "eu": "Viena",
+                    "tt": "\u0412\u0435\u043d\u0430 \u0448\u04d9\u04bb\u04d9\u0440\u0435",
+                    "gl": "Viena",
+                    "bn": "\u09ad\u09bf\u09af\u09bc\u09c7\u09a8\u09be",
+                    "ce": "\u0412\u0435\u043d\u0430",
+                    "sk": "Viede\u0148",
+                    "bi": "Vienna",
+                    "br": "Vienna",
+                    "bo": "\u0f5d\u0f72\u0f0b\u0f68\u0f7a\u0f0b\u0f53\u0f0d",
+                    "kv": "\u0412\u0435\u043d\u0430",
+                    "en": "Vienna",
+                    "ie": "Vienna",
+                    "ca": "Viena",
+                    "fy": "Wenen",
+                    "uk": "\u0412\u0456\u0434\u0435\u043d\u044c",
+                    "wo": "Wiyen",
+                    "gd": "Vienna",
+                    "hr": "Be\u010d",
+                    "ee": "Vienna",
+                    "id": "Wina",
+                    "sr": "\u0411\u0435\u0447",
+                    "ia": "Vienna",
+                    "el": "\u0392\u03b9\u03ad\u03bd\u03bd\u03b7",
+                    "ht": "Vy\u00e8n",
+                    "sh": "Be\u010d",
+                    "be": "\u0412\u0435\u043d\u0430",
+                    "nl": "Wenen",
+                    "st": "Vienna",
+                    "tl": "Vienna",
+                    "ru": "\u0412\u0435\u043d\u0430",
+                    "bs": "Be\u010d",
+                    "ug": "Wy\u00e9na",
+                    "mn": "\u0412\u0435\u043d\u0430",
+                    "tr": "Viyana",
+                    "so": "Fiyena",
+                    "sw": "Vienna",
+                    "ka": "\u10d5\u10d4\u10dc\u10d0",
+                    "li": "Wene",
+                    "yo": "Vienna",
+                    "no": "Wien",
+                    "mi": "Whiena",
+                    "mk": "\u0412\u0438\u0435\u043d\u0430",
+                    "th": "\u0e40\u0e27\u0e35\u0e22\u0e19\u0e19\u0e32",
+                    "he": "\u05d5\u05d9\u05e0\u05d4",
+                    "an": "Viena",
+                    "ky": "\u0412\u0435\u043d\u0430",
+                    "cs": "V\u00edde\u0148",
+                    "sq": "Vjena",
+                    "ku": "Viyana",
+                    "hu": "B\u00e9cs",
+                    "kn": "\u0cb5\u0cbf\u0caf\u0cc6\u0ca8\u0ccd\u0ca8",
+                    "tk": "Wena",
+                    "ba": "Be\u010d",
+                    "oc": "Viena",
+                    "fr": "Vienne",
+                    "ga": "V\u00edn",
+                    "am": "\u126a\u12e8\u1293",
+                    "la": "Vindobona",
+                    "pt": "Viena",
+                    "jv": "Wina",
+                    "ps": "\u0648\u064a\u0646",
+                    "sc": "Vienna",
+                    "ko": "\ube48",
+                    "ar": "\u0641\u064a\u064a\u0646\u0627",
+                    "de": "Wien",
+                    "ln": "Vi\u025bn\u025b",
+                    "eo": "Vieno",
+                    "pl": "Wiede\u0144",
+                    "af": "Wene",
+                    "fa": "\u0648\u06cc\u0646",
+                    "ur": "\u0648\u06cc\u0627\u0646\u0627",
+                    "bg": "\u0412\u0438\u0435\u043d\u0430",
+                    "ro": "Viena",
+                    "lv": "V\u012bne",
+                    "es": "Viena",
+                    "ja": "\u30a6\u30a3\u30fc\u30f3",
+                    "vi": "Vi\u00ean",
+                    "my": "\u1017\u102e\u101a\u1004\u103a\u1014\u102c\u1019\u103c\u102d\u102f\u1037",
+                    "az": "Vyana",
+                    "co": "Vienna",
+                    "ms": "Vienna",
+                    "os": "\u0412\u0435\u043d\u00e6",
+                    "lt": "Viena",
+                    "ml": "\u0d35\u0d3f\u0d2f\u0d28\u0d4d\u0d28",
+                    "et": "Viin"
+>>>>>>> 9df807d (Added basic files for website)
                 },
                 "lat": 48.2083537,
                 "lon": 16.3725042,
@@ -119,14 +224,22 @@
             },
             "weather": [
                 {
+<<<<<<< HEAD
                     "id": 803,
                     "main": "Clouds",
                     "description": "broken clouds",
                     "icon": "04n"
+=======
+                    "id": 701,
+                    "main": "Mist",
+                    "description": "mist",
+                    "icon": "50n"
+>>>>>>> 9df807d (Added basic files for website)
                 }
             ],
             "base": "stations",
             "main": {
+<<<<<<< HEAD
                 "temp": 4.41,
                 "feels_like": 0.08,
                 "temp_min": 3.71,
@@ -140,17 +253,41 @@
             "wind": {
                 "speed": 6.17,
                 "deg": 150
+=======
+                "temp": 2.87,
+                "feels_like": 2.87,
+                "temp_min": 1.99,
+                "temp_max": 3.85,
+                "pressure": 1029,
+                "humidity": 93,
+                "sea_level": 1029,
+                "grnd_level": 1001
+            },
+            "visibility": 4900,
+            "wind": {
+                "speed": 1.03,
+                "deg": 160
+>>>>>>> 9df807d (Added basic files for website)
             },
             "clouds": {
                 "all": 75
             },
+<<<<<<< HEAD
             "dt": 1764781963,
+=======
+            "dt": 1765670490,
+>>>>>>> 9df807d (Added basic files for website)
             "sys": {
                 "type": 2,
                 "id": 2037452,
                 "country": "AT",
+<<<<<<< HEAD
                 "sunrise": 1764743201,
                 "sunset": 1764774141
+=======
+                "sunrise": 1765694271,
+                "sunset": 1765724440
+>>>>>>> 9df807d (Added basic files for website)
             },
             "timezone": 3600,
             "id": 2761369,
@@ -311,6 +448,7 @@
             {
                 "name": "London",
                 "local_names": {
+<<<<<<< HEAD
                     "hu": "London",
                     "mk": "\u041b\u043e\u043d\u0434\u043e\u043d",
                     "feature_name": "London",
@@ -459,6 +597,156 @@
                     "ar": "\u0644\u0646\u062f\u0646",
                     "pl": "Londyn",
                     "ka": "\u10da\u10dd\u10dc\u10d3\u10dd\u10dc\u10d8"
+=======
+                    "id": "London",
+                    "de": "London",
+                    "it": "Londra",
+                    "ta": "\u0b87\u0bb2\u0ba3\u0bcd\u0b9f\u0ba9\u0bcd",
+                    "be": "\u041b\u043e\u043d\u0434\u0430\u043d",
+                    "si": "\u0dbd\u0db1\u0dca\u0da9\u0db1\u0dca",
+                    "io": "London",
+                    "or": "\u0b32\u0b23\u0b4d\u0b21\u0b28",
+                    "ba": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "af": "Londen",
+                    "kk": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "ps": "\u0644\u0646\u062f\u0646",
+                    "is": "London",
+                    "ka": "\u10da\u10dd\u10dc\u10d3\u10dd\u10dc\u10d8",
+                    "az": "London",
+                    "sa": "\u0932\u0928\u094d\u0921\u0928\u094d",
+                    "co": "Londra",
+                    "an": "Londres",
+                    "my": "\u101c\u1014\u103a\u1012\u1014\u103a\u1019\u103c\u102d\u102f\u1037",
+                    "tr": "Londra",
+                    "ro": "Londra",
+                    "en": "London",
+                    "sh": "London",
+                    "feature_name": "London",
+                    "ms": "London",
+                    "ln": "L\u00f3nd\u025bl\u025b",
+                    "hy": "\u053c\u0578\u0576\u0564\u0578\u0576",
+                    "da": "London",
+                    "cu": "\u041b\u043e\u043d\u0434\u043e\u043d\u044a",
+                    "lo": "\u0ea5\u0ead\u0e99\u0e94\u0ead\u0e99",
+                    "gv": "Lunnin",
+                    "ca": "Londres",
+                    "mn": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "zu": "ILondon",
+                    "mt": "Londra",
+                    "br": "Londrez",
+                    "na": "London",
+                    "av": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "ay": "London",
+                    "rm": "Londra",
+                    "lb": "London",
+                    "lv": "Londona",
+                    "ga": "Londain",
+                    "wo": "Londar",
+                    "sw": "London",
+                    "tt": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "gl": "Londres",
+                    "zh": "\u4f26\u6566",
+                    "ia": "London",
+                    "bn": "\u09b2\u09a8\u09cd\u09a1\u09a8",
+                    "vi": "Lu\u00e2n \u0110\u00f4n",
+                    "sm": "Lonetona",
+                    "ig": "London",
+                    "bs": "London",
+                    "nv": "Tooh Dine\u02bc\u00e9 Bikin Haal\u02bc\u00e1",
+                    "om": "Landan",
+                    "vo": "London",
+                    "fy": "Londen",
+                    "ml": "\u0d32\u0d23\u0d4d\u0d1f\u0d7b",
+                    "ee": "London",
+                    "fi": "Lontoo",
+                    "pa": "\u0a32\u0a70\u0a21\u0a28",
+                    "ht": "Lonn",
+                    "km": "\u17a1\u17bb\u1784\u178a\u17cd",
+                    "mr": "\u0932\u0902\u0921\u0928",
+                    "es": "Londres",
+                    "et": "London",
+                    "jv": "London",
+                    "mi": "R\u0101nana",
+                    "wa": "Londe",
+                    "bm": "London",
+                    "ha": "Landan",
+                    "ru": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "uk": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "cv": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "bi": "London",
+                    "eu": "Londres",
+                    "li": "Londe",
+                    "se": "London",
+                    "tl": "Londres",
+                    "ky": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "mk": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "qu": "London",
+                    "tg": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "to": "Lonitoni",
+                    "sn": "London",
+                    "sd": "\u0644\u0646\u068a\u0646",
+                    "ug": "\u0644\u0648\u0646\u062f\u06c7\u0646",
+                    "am": "\u1208\u1295\u12f0\u1295",
+                    "sk": "Lond\u00fdn",
+                    "os": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "ja": "\u30ed\u30f3\u30c9\u30f3",
+                    "oc": "Londres",
+                    "gu": "\u0ab2\u0a82\u0aa1\u0aa8",
+                    "th": "\u0e25\u0e2d\u0e19\u0e14\u0e2d\u0e19",
+                    "cs": "Lond\u00fdn",
+                    "ce": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "fj": "Lodoni",
+                    "tk": "London",
+                    "ur": "\u0639\u0644\u0627\u0642\u06c1 \u0644\u0646\u062f\u0646",
+                    "su": "London",
+                    "bh": "\u0932\u0902\u0926\u0928",
+                    "ny": "London",
+                    "lt": "Londonas",
+                    "pl": "Londyn",
+                    "el": "\u039b\u03bf\u03bd\u03b4\u03af\u03bd\u03bf",
+                    "eo": "Londono",
+                    "kn": "\u0cb2\u0c82\u0ca1\u0ca8\u0ccd",
+                    "no": "London",
+                    "sq": "Londra",
+                    "hr": "London",
+                    "ar": "\u0644\u0646\u062f\u0646",
+                    "bg": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "ku": "London",
+                    "ab": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "uz": "London",
+                    "kv": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "hu": "London",
+                    "sc": "Londra",
+                    "ko": "\ub7f0\ub358",
+                    "nn": "London",
+                    "yo": "L\u1ecdnd\u1ecdnu",
+                    "te": "\u0c32\u0c02\u0c21\u0c28\u0c4d",
+                    "pt": "Londres",
+                    "ie": "London",
+                    "so": "London",
+                    "he": "\u05dc\u05d5\u05e0\u05d3\u05d5\u05df",
+                    "fo": "London",
+                    "kw": "Loundres",
+                    "ascii": "London",
+                    "mg": "L\u00f4nd\u00f4na",
+                    "yi": "\u05dc\u05d0\u05e0\u05d3\u05d0\u05df",
+                    "ne": "\u0932\u0928\u094d\u0921\u0928",
+                    "gd": "Lunnainn",
+                    "hi": "\u0932\u0902\u0926\u0928",
+                    "kl": "London",
+                    "fr": "Londres",
+                    "bo": "\u0f63\u0f7c\u0f53\u0f0b\u0f4a\u0f7c\u0f53\u0f0d",
+                    "nl": "Londen",
+                    "cy": "Llundain",
+                    "st": "London",
+                    "gn": "L\u00f3ndyre",
+                    "sv": "London",
+                    "ff": "London",
+                    "fa": "\u0644\u0646\u062f\u0646",
+                    "sr": "\u041b\u043e\u043d\u0434\u043e\u043d",
+                    "tw": "London",
+                    "sl": "London"
+>>>>>>> 9df807d (Added basic files for website)
                 },
                 "lat": 51.5073219,
                 "lon": -0.1276474,
@@ -473,14 +761,22 @@
             },
             "weather": [
                 {
+<<<<<<< HEAD
                     "id": 800,
                     "main": "Clear",
                     "description": "clear sky",
                     "icon": "01n"
+=======
+                    "id": 801,
+                    "main": "Clouds",
+                    "description": "few clouds",
+                    "icon": "02n"
+>>>>>>> 9df807d (Added basic files for website)
                 }
             ],
             "base": "stations",
             "main": {
+<<<<<<< HEAD
                 "temp": 8.07,
                 "feels_like": 6.49,
                 "temp_min": 6.56,
@@ -499,6 +795,27 @@
                 "all": 0
             },
             "dt": 1764780954,
+=======
+                "temp": 5.72,
+                "feels_like": 4.43,
+                "temp_min": 3.78,
+                "temp_max": 6.43,
+                "pressure": 1014,
+                "humidity": 83,
+                "sea_level": 1014,
+                "grnd_level": 1010
+            },
+            "visibility": 10000,
+            "wind": {
+                "speed": 1.79,
+                "deg": 233,
+                "gust": 4.02
+            },
+            "clouds": {
+                "all": 20
+            },
+            "dt": 1764537536,
+>>>>>>> 9df807d (Added basic files for website)
             "sys": {
                 "type": 2,
                 "id": 2075535,
@@ -513,6 +830,7 @@
         },
         "place_name": "London"
     },
+<<<<<<< HEAD
     "Rome": {
         "coords": [
             {
@@ -648,23 +966,152 @@
                 "lon": 12.4829321,
                 "country": "IT",
                 "state": "Lazio"
+=======
+    "Lisbon": {
+        "coords": [
+            {
+                "name": "Lisbon",
+                "local_names": {
+                    "hu": "Lisszabon",
+                    "ku": "L\u00eezbon",
+                    "ro": "Lisabona",
+                    "he": "\u05dc\u05d9\u05e1\u05d1\u05d5\u05df",
+                    "tw": "Lisbon",
+                    "ga": "Liosp\u00f3in",
+                    "cs": "Lisabon",
+                    "ta": "\u0bb2\u0bbf\u0bb8\u0bcd\u0baa\u0ba9\u0bcd",
+                    "os": "\u041b\u0438\u0441\u0441\u0430\u0431\u043e\u043d",
+                    "cy": "Lisbon",
+                    "kk": "\u041b\u0438\u0441\u0441\u0430\u0431\u043e\u043d",
+                    "bn": "\u09b2\u09bf\u09b8\u09ac\u09a8",
+                    "my": "\u101c\u1005\u103a\u1005\u1018\u103d\u1014\u103a\u1038\u1019\u103c\u102d\u102f\u1037",
+                    "sc": "Lisbona",
+                    "hr": "Lisabon",
+                    "gd": "Lisbon",
+                    "fi": "Lissabon",
+                    "ur": "\u0644\u0632\u0628\u0646",
+                    "sh": "Lisabon",
+                    "yi": "\u05dc\u05d9\u05e1\u05d1\u05d0\u05df",
+                    "hy": "\u053c\u056b\u057d\u0561\u0562\u0578\u0576",
+                    "lt": "Lisabona",
+                    "mk": "\u041b\u0438\u0441\u0430\u0431\u043e\u043d",
+                    "be": "\u041b\u0456\u0441\u0430\u0431\u043e\u043d",
+                    "pt": "Lisboa",
+                    "am": "\u120a\u12dd\u1266\u1295",
+                    "tt": "\u041b\u0438\u0441\u0441\u0430\u0431\u043e\u043d",
+                    "sk": "Lisabon",
+                    "th": "\u0e25\u0e34\u0e2a\u0e1a\u0e2d\u0e19",
+                    "yo": "Lisbon",
+                    "de": "Lissabon",
+                    "ee": "Lisbon",
+                    "uk": "\u041b\u0456\u0441\u0430\u0431\u043e\u043d",
+                    "nl": "Lissabon",
+                    "fo": "Lisboa",
+                    "tl": "Lisboa",
+                    "wo": "Lisbon",
+                    "pl": "Lizbona",
+                    "lv": "Lisabona",
+                    "it": "Lisbona",
+                    "bo": "\u0f63\u0f72\u0f0b\u0f66\u0f72\u0f0b\u0f56\u0f71\u0f7c\u0f53\u0f0d",
+                    "br": "Lisbon",
+                    "ml": "\u0d32\u0d3f\u0d38\u0d4d\u200c\u0d2c\u0d7a",
+                    "sr": "\u041b\u0438\u0441\u0430\u0431\u043e\u043d",
+                    "no": "Lisboa",
+                    "id": "Lisboa",
+                    "bg": "\u041b\u0438\u0441\u0430\u0431\u043e\u043d",
+                    "ln": "Lisboa",
+                    "sa": "\u0932\u093f\u0938\u094d\u092c\u0928",
+                    "ug": "\u0644\u0649\u0633\u0628\u0648\u0646",
+                    "jv": "Lisabon",
+                    "mi": "Rihipone",
+                    "ka": "\u10da\u10d8\u10e1\u10d0\u10d1\u10dd\u10dc\u10d8",
+                    "ja": "\u30ea\u30b9\u30dc\u30f3",
+                    "fa": "\u0644\u06cc\u0633\u0628\u0648\u0646",
+                    "el": "\u039b\u03b9\u03c3\u03b1\u03b2\u03cc\u03bd\u03b1",
+                    "ru": "\u041b\u0438\u0441\u0441\u0430\u0431\u043e\u043d",
+                    "eu": "Lisboa",
+                    "en": "Lisbon",
+                    "vo": "Lisboa",
+                    "fy": "Lissabon",
+                    "et": "Lissabon",
+                    "ms": "Lisbon",
+                    "co": "Lisbona",
+                    "ca": "Lisboa",
+                    "eo": "Lisbono",
+                    "bs": "Lisabon",
+                    "gv": "Lisboa",
+                    "gl": "Lisboa",
+                    "ie": "Lisboa",
+                    "qu": "Lisboa",
+                    "ia": "Lisbona",
+                    "tr": "Lizbon",
+                    "oc": "Lisbona",
+                    "ascii": "Lisbon",
+                    "io": "Lisboa",
+                    "an": "Lisbona",
+                    "sw": "Lisbon",
+                    "hi": "\u0932\u093f\u0938\u094d\u092c\u0928",
+                    "kw": "Lisboa",
+                    "mr": "\u0932\u093f\u0938\u094d\u092c\u0928",
+                    "te": "\u0c32\u0c3f\u0c38\u0c4d\u0c2c\u0c28\u0c4d",
+                    "nn": "Lisboa",
+                    "sv": "Lissabon",
+                    "tg": "\u041b\u0438\u0441\u0441\u0430\u0431\u043e\u043d",
+                    "sq": "Lisbona",
+                    "rn": "Lisboa",
+                    "ty": "Lisboa",
+                    "st": "Lisbon",
+                    "kn": "\u0cb2\u0cbf\u0cb8\u0ccd\u0cac\u0cca\u0ca8\u0ccd",
+                    "es": "Lisboa",
+                    "rm": "Lisbona",
+                    "cv": "\u041b\u0438\u0441\u0441\u0430\u0431\u043e\u043d",
+                    "feature_name": "Lisbon",
+                    "ht": "Lisb\u00f2n",
+                    "is": "Lissabon",
+                    "sl": "Lizbona",
+                    "la": "Olisipo",
+                    "fr": "Lisbonne",
+                    "ky": "\u041b\u0438\u0441\u0441\u0430\u0431\u043e\u043d",
+                    "ar": "\u0644\u0634\u0628\u0648\u0646\u0629",
+                    "vi": "Lisboa",
+                    "ko": "\ub9ac\uc2a4\ubcf8",
+                    "gn": "Lisimb\u00e3",
+                    "kv": "\u041b\u0438\u0441\u0441\u0430\u0431\u043e\u043d",
+                    "zh": "\u91cc\u65af\u672c",
+                    "ba": "\u041b\u0438\u0441\u0441\u0430\u0431\u043e\u043d",
+                    "da": "Lissabon"
+                },
+                "lat": 38.7077507,
+                "lon": -9.1365919,
+                "country": "PT"
+>>>>>>> 9df807d (Added basic files for website)
             }
         ],
         "weather": {
             "coord": {
+<<<<<<< HEAD
                 "lon": 12.4829,
                 "lat": 41.8933
+=======
+                "lon": -9.1366,
+                "lat": 38.7078
+>>>>>>> 9df807d (Added basic files for website)
             },
             "weather": [
                 {
                     "id": 800,
                     "main": "Clear",
                     "description": "clear sky",
+<<<<<<< HEAD
                     "icon": "01n"
+=======
+                    "icon": "01d"
+>>>>>>> 9df807d (Added basic files for website)
                 }
             ],
             "base": "stations",
             "main": {
+<<<<<<< HEAD
                 "temp": 11.65,
                 "feels_like": 10.86,
                 "temp_min": 9.79,
@@ -678,10 +1125,26 @@
             "wind": {
                 "speed": 1.03,
                 "deg": 0
+=======
+                "temp": 9.5,
+                "feels_like": 8.56,
+                "temp_min": 8.87,
+                "temp_max": 11.14,
+                "pressure": 1022,
+                "humidity": 72,
+                "sea_level": 1022,
+                "grnd_level": 1013
+            },
+            "visibility": 10000,
+            "wind": {
+                "speed": 2.06,
+                "deg": 30
+>>>>>>> 9df807d (Added basic files for website)
             },
             "clouds": {
                 "all": 0
             },
+<<<<<<< HEAD
             "dt": 1764781552,
             "sys": {
                 "type": 2,
@@ -942,10 +1405,43 @@
                 "lat": 47.4979937,
                 "lon": 19.0403594,
                 "country": "HU"
+=======
+            "dt": 1764579552,
+            "sys": {
+                "type": 1,
+                "id": 6901,
+                "country": "PT",
+                "sunrise": 1764574553,
+                "sunset": 1764609344
+            },
+            "timezone": 0,
+            "id": 6930126,
+            "name": "Chiado",
+            "cod": 200
+        },
+        "place_name": "Lisbon"
+    },
+    "Lucija ": {
+        "coords": [
+            {
+                "name": "Lucija / Lucia",
+                "local_names": {
+                    "feature_name": "Lucija",
+                    "it": "Lucia",
+                    "mk": "\u041b\u0443\u0446\u0438\u0458\u0430",
+                    "ru": "\u041b\u0443\u0446\u0438\u044f",
+                    "sl": "Lucija",
+                    "ascii": "Lucija"
+                },
+                "lat": 45.50708,
+                "lon": 13.6046378,
+                "country": "SI"
+>>>>>>> 9df807d (Added basic files for website)
             }
         ],
         "weather": {
             "coord": {
+<<<<<<< HEAD
                 "lon": 19.0404,
                 "lat": 47.498
             },
@@ -967,10 +1463,22 @@
                     "main": "Mist",
                     "description": "mist",
                     "icon": "50n"
+=======
+                "lon": 13.6046,
+                "lat": 45.5071
+            },
+            "weather": [
+                {
+                    "id": 803,
+                    "main": "Clouds",
+                    "description": "broken clouds",
+                    "icon": "04d"
+>>>>>>> 9df807d (Added basic files for website)
                 }
             ],
             "base": "stations",
             "main": {
+<<<<<<< HEAD
                 "temp": 2.39,
                 "feels_like": -0.26,
                 "temp_min": 1.73,
@@ -1002,18 +1510,129 @@
             "cod": 200
         },
         "place_name": "Budapest"
+=======
+                "temp": 13.84,
+                "feels_like": 12.79,
+                "temp_min": 11.9,
+                "temp_max": 13.84,
+                "pressure": 1020,
+                "humidity": 58,
+                "sea_level": 1020,
+                "grnd_level": 1015
+            },
+            "visibility": 10000,
+            "wind": {
+                "speed": 2.06,
+                "deg": 110
+            },
+            "clouds": {
+                "all": 75
+            },
+            "dt": 1764587889,
+            "sys": {
+                "type": 1,
+                "id": 6831,
+                "country": "SI",
+                "sunrise": 1764570328,
+                "sunset": 1764602651
+            },
+            "timezone": 3600,
+            "id": 3343512,
+            "name": "Lucija",
+            "cod": 200
+        },
+        "place_name": "Lucija "
+    },
+    "Koper ": {
+        "coords": [
+            {
+                "name": "Koper / Capodistria",
+                "local_names": {
+                    "la": "Aegida",
+                    "it": "Capodistria",
+                    "ascii": "Koper",
+                    "feature_name": "Koper",
+                    "da": "Koper",
+                    "ja": "\u30b3\u30da\u30eb",
+                    "hr": "Kopar",
+                    "ar": "Koper",
+                    "ru": "\u041a\u043e\u043f\u0435\u0440",
+                    "sl": "Koper",
+                    "lt": "Koperis",
+                    "mk": "\u041a\u043e\u043f\u0435\u0440"
+                },
+                "lat": 45.5479864,
+                "lon": 13.7304781,
+                "country": "SI"
+            }
+        ],
+        "weather": {
+            "coord": {
+                "lon": 13.7305,
+                "lat": 45.548
+            },
+            "weather": [
+                {
+                    "id": 803,
+                    "main": "Clouds",
+                    "description": "broken clouds",
+                    "icon": "04d"
+                }
+            ],
+            "base": "stations",
+            "main": {
+                "temp": 8.95,
+                "feels_like": 7.53,
+                "temp_min": 8.95,
+                "temp_max": 9.87,
+                "pressure": 1021,
+                "humidity": 76,
+                "sea_level": 1021,
+                "grnd_level": 1000
+            },
+            "visibility": 10000,
+            "wind": {
+                "speed": 2.57,
+                "deg": 130
+            },
+            "clouds": {
+                "all": 75
+            },
+            "dt": 1764580108,
+            "sys": {
+                "type": 1,
+                "id": 6831,
+                "country": "SI",
+                "sunrise": 1764570306,
+                "sunset": 1764602612
+            },
+            "timezone": 3600,
+            "id": 3197753,
+            "name": "Koper",
+            "cod": 200
+        },
+        "place_name": "Koper "
+>>>>>>> 9df807d (Added basic files for website)
     },
     "Murska Sobota": {
         "coords": [
             {
                 "name": "Murska Sobota",
                 "local_names": {
+<<<<<<< HEAD
+=======
+                    "lt": "Murska Sobota",
+>>>>>>> 9df807d (Added basic files for website)
                     "de": "Olsnitz",
                     "ja": "\u30e0\u30eb\u30b9\u30ab\u30fb\u30bd\u30dc\u30bf",
                     "ru": "\u041c\u0443\u0440\u0441\u043a\u0430-\u0421\u043e\u0431\u043e\u0442\u0430",
                     "hu": "Muraszombat v\u00e1rosi k\u00f6zs\u00e9g",
+<<<<<<< HEAD
                     "sl": "Murska Sobota",
                     "lt": "Murska Sobota"
+=======
+                    "sl": "Murska Sobota"
+>>>>>>> 9df807d (Added basic files for website)
                 },
                 "lat": 46.6624644,
                 "lon": 16.1655256,
@@ -1022,19 +1641,31 @@
         ],
         "weather": {
             "coord": {
+<<<<<<< HEAD
                 "lon": 16.1655,
+=======
+                "lon": 16.1664,
+>>>>>>> 9df807d (Added basic files for website)
                 "lat": 46.6625
             },
             "weather": [
                 {
+<<<<<<< HEAD
                     "id": 803,
                     "main": "Clouds",
                     "description": "broken clouds",
                     "icon": "04n"
+=======
+                    "id": 804,
+                    "main": "Clouds",
+                    "description": "overcast clouds",
+                    "icon": "04d"
+>>>>>>> 9df807d (Added basic files for website)
                 }
             ],
             "base": "stations",
             "main": {
+<<<<<<< HEAD
                 "temp": 3.02,
                 "feels_like": 1.9,
                 "temp_min": 3.02,
@@ -1058,6 +1689,33 @@
                 "country": "SI",
                 "sunrise": 1764656428,
                 "sunset": 1764688166
+=======
+                "temp": 6.66,
+                "feels_like": 6.66,
+                "temp_min": 6.66,
+                "temp_max": 6.66,
+                "pressure": 1021,
+                "humidity": 80,
+                "sea_level": 1021,
+                "grnd_level": 993
+            },
+            "visibility": 10000,
+            "wind": {
+                "speed": 0.21,
+                "deg": 191,
+                "gust": 0.18
+            },
+            "clouds": {
+                "all": 100
+            },
+            "dt": 1764587640,
+            "sys": {
+                "type": 2,
+                "id": 2101191,
+                "country": "SI",
+                "sunrise": 1764569957,
+                "sunset": 1764601792
+>>>>>>> 9df807d (Added basic files for website)
             },
             "timezone": 3600,
             "id": 3194648,
