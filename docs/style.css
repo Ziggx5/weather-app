@@ -10,16 +10,27 @@ a {
 
 .header {
     display: flex;
-    align-items: center;
-    gap: 10px; 
+    align-items: flex-end;
+    gap: 20px; 
     color: #c0c0c0;
     font-size: 25px;
 }
 
 .download_button_section {
-    padding: 20px;
-    margin-left: 25%;
+    padding-bottom: 20px;
+    margin-left: 15%;
 }
+
+.download_button_section img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.download_button_section button {
+    margin-right: 3%;
+}
+
 .download_button {
     padding: 15px 25px;
     border-radius: 10px;
@@ -27,16 +38,41 @@ a {
     background-color: whitesmoke;
     color: black;
     border-style: none;
+    cursor:  pointer;
 }
 
-.download_button img {
-    width: 20px;
-    height: 20px;
+.download_button a{
+    color: black;
 }
+
+.all_downloads_button {
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: rgb(0, 86, 167);
+    color: black;
+    border-style: none;
+}
+
+.github_button {
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: rgb(89, 0, 172);
+    color: black;
+    border-style: none;
+    cursor:  pointer;
+}
+
+.github_button a {
+    color: black;
+}
+
 .description {
     color: #c0c0c0;
     font-size: 20px;
     margin-left: 20px;
+    padding: 5px;
     border-radius: 10px;
     background-color: #2e2e2e;
     width: 50%;
