@@ -10,15 +10,22 @@ a {
 
 .header {
     display: flex;
-    align-items: flex-end;
+    align-items: baseline;
     gap: 20px; 
-    color: #c0c0c0;
-    font-size: 25px;
+    color: #e0e0e0;
+    font-size: 28px;
+    margin-left: 20px;
+}
+
+.header p {
+    font-size: 16px;
+    opacity: 0.6;
 }
 
 .download_button_section {
     padding-bottom: 20px;
-    margin-left: 15%;
+    width: 50%;
+    margin-left: 20px;
 }
 
 .download_button_section img {
@@ -28,7 +35,7 @@ a {
 }
 
 .download_button_section button {
-    margin-right: 3%;
+    margin-right: 10px;
 }
 
 .download_button {
@@ -71,7 +78,7 @@ a {
 .description {
     color: #c0c0c0;
     font-size: 20px;
-    margin-left: 20px;
+    margin-left: 1%;
     padding: 5px;
     border-radius: 10px;
     background-color: #2e2e2e;
@@ -93,4 +100,50 @@ a {
 
 .description ul {
     margin: 0px;
+}
+
+.description img {
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.downloads {
+    color: #c0c0c0;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #2e2e2e;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+    line-height: 1.5;
+    margin-left: 5%;
+    width: 30%;
+    height: 50%;
+    margin-right: 1%;
+}
+
+.container {
+    display: flex;
+}
+
+.donate_container {
+    margin-left: 40%;
+    width: 250px;
+    line-height: 1.5;
+    border-style: dashed;
+    border-color: #2e2e2e;
+    padding: 10px;
+}
+
+.Kofi_donate_button {
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: #72A5F2;
+    color: black;
+    border-style: none;
+    cursor:  pointer;
+}
+
+.Kofi_donate_button img {
+    width: 90px;
 }

@@ -2,41 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Weather App</title>
+    <meta name = "description" content= "Modern Python desktop weather app built with CustomTkinter and OpenWeather API. Download clean, minimal weather application for Windows and Linux">
+    <title>Weather App - Python Desktop Weather Application</title>
     <link rel="icon" type="image/x-icon" href="images/weather_icon.ico">
     <link rel = "stylesheet" href = "style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class = "header">
-        <h1>🌤️ Weather App</h1>
+    <header class = "header">
+        <h1>🌤️ Weather</h1>
         <p>Latest version 2.1</p>
-    </div>
+        <div class = "donate_container">
+            <a href = "https://ko-fi.com/ziggx5"><button class = "Kofi_donate_button"><img src = "images/kofi_logo.png" alt = "Kofi logo"></button></a>
+            <p>If you like this project and want to support a student developer, I'd be grateful for a donation ❤️</p>
+        </div>
+        <div class = "contacts_container">
+
+        </div>
+    </header>
 
     <div class = "download_button_section">
-        <button class = "download_button"><img src = "images/download.png" alt = "Download button"><a href="files/Weather.2.1.zip">Download</a></button>
+        <a href = "files/Weather.2.1.zip"><button class ="download_button"><img src = "images/download.png" alt = "Download button">Download</button></a>
         <button class = "all_downloads_button"><img src = "images/all_files.png" alt = "All files button">All versions</button>
-        <button class = "github_button"><img src = "images/github_logo.png" alt = "github button"><a href="https://github.com/Ziggx5/weather-app">github repository</a></button>
+        <a href = "https://github.com/Ziggx5/weather-app"><button class = "github_button"><img src = "images/github_logo.png" alt = "github button">github repository</button></a>
     </div>
-    
-    <div class = "description">
-        <h2>Description</h2>
-        <p>🌤️ Weather — Python Desktop Weather App. Modern desktop app built with Python, CustomTkinter, and OpenWeather API. A clean UI focused on minimalism, real-time data, favourite locations all in one simple desktop app.</p>
-        <div><img src = "images/screenshot.png" alt="screenshot"></div>
-        <h2>Features</h2>
-        <ul>
-            <li>🔍 Search any city</li>
-            <li>⭐ Favourite places</li>
-            <li>🌡️ Dynamic temperature color</li>
-            <li>🌅 Sunrise and sunset times</li>
-            <li>🌧️ Rain precipitation</li>
-            <li>💧 Humidity</li>
-            <li>🌪️ Wind speed and angle</li>
-            <li>🔴 Offline mode</li>
-        </ul>
-        <h2>After installation</h2>
-        <p>In app, open settings and paste your API (Can be obtained from <a href="https://openweathermap.org">here</a>)</p>
+    <div class="container">
+        <div class = "description">
+            <h2>Description</h2>
+            <p>🌤️ Weather — Python Desktop Weather App. Modern desktop app built with Python, CustomTkinter, and OpenWeather API. A clean UI focused on minimalism, real-time data, favourite locations all in one simple desktop app.</p>
+            <div><img src = "images/screenshot.png" alt="screenshot"></div>
+            <h2>Features</h2>
+            <ul>
+                <li>🔍 Search any city</li>
+                <li>⭐ Favourite places</li>
+                <li>🌡️ Dynamic temperature color</li>
+                <li>🌅 Sunrise and sunset times</li>
+                <li>🌧️ Rain precipitation</li>
+                <li>💧 Humidity</li>
+                <li>🌪️ Wind speed and angle</li>
+                <li>🔴 Offline mode</li>
+            </ul>
+            <h2>After installation</h2>
+            <p>In app, open settings and paste your API (Can be obtained from <a href="https://openweathermap.org">here</a>)</p>
+        </div>
+        <div class = "downloads">
+
+        </div>
     </div>
 
 </body>
