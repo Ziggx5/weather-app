@@ -124,7 +124,10 @@ for file_name in os.listdir(images_path):
 app = CTk()
 app.geometry("800x730")
 app.title("Weather")
-app.iconphoto(True, ImageTk.PhotoImage(file = app_icon_path))
+if sys.platform.startswith("win"):
+    app.iconbitmap(app_icon_path)
+else:
+    app.iconphoto(True, ImageTk.PhotoImage(file = app_icon_path))
 app.configure(fg_color = "#242424")
 app.resizable(False, False)
 
