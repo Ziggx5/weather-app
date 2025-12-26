@@ -7,7 +7,7 @@ A clean UI focused on minimalism, real-time data, favourite locations all in one
 
 Webpage: https://ziggx5.github.io/weather-app/
 
-Image from latest version (2.0)
+Image from latest version (2.2)
 <img width="828" height="782" alt="image" src="https://github.com/user-attachments/assets/897ea3a5-edb6-4c09-bc19-11398d93ec4e" />
 
 ---
