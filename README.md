@@ -1,5 +1,3 @@
-Linux support **soon**!
-
 🌤️ Weather — Python Desktop Weather App
 
 Modern desktop app built with **Python**, **CustomTkinter**, and **OpenWeather API**.
@@ -47,11 +45,13 @@ Image from latest version (2.2)
 📄 License
 
 This project is licensed under the GPL-3.0 License.
+
 Copyright © 2025 Ziggx5
 
 👤 Author
 
 Ziggx5
+
 Github: https://github.com/Ziggx5
 
 Discord: ziggx
